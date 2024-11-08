@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Buy-in Prediction</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary,
+        .bg-primary,
+        .text-primary,
+        .navbar-dark .navbar-nav .nav-link.active {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+            color: #000 !important;
+        }
+
+        .btn-primary:hover,
+        .bg-primary:hover {
+            background-color: #ffdd57 !important;
+        }
+
+        .container.center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        label {
+            font-weight: bold;
+            color: rgb(255,255,255);
+        }
+
+        body {
+            background-color: #f1f1f1;
+            background-image: url('https://www.greentek.eu/media/images/3BestMethodsToCreateAnEnergyEfficientSupermarket_5.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: #ffc107;
+            font-size: 40px;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container center">
+        <h1 class="mt-5 ml-2">Customer Buy-In Prediction</h1>
+
+        <!-- Display result message -->
+        {% if result %} 
+        <div class="alert alert-{{ result_class }}">
+            {{ result }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container my-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Education">Education (eg:1,2,3)</label>
+                            <input type="number" class="form-control" id="Education" name="Education" required
+                                value="{{ education|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Marital_Status">Marital_Status (eg: 0 for Male, 1 for Female)</label>
+                            <input type="number" class="form-control" id="Marital_Status" name="Marital_Status" required
+                                value="{{ maritalstatus|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Income">Income</label>
+                            <input type="number" class="form-control" id="Income" name="Income" required
+                                value="{{ income|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Kidhome">Kidhome</label>
+                            <input type="number" class="form-control" id="Kidhome" name="Kidhome" required
+                                value="{{ kidhome|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Teenhome">Teenhome</label>
+                            <input type="number" class="form-control" id="Teenhome" name="Teenhome" required
+                                value="{{ teenhome|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="MntFruits">MntFruits</label>
+                            <input type="number" step="0.1" class="form-control" id="MntFruits" name="MntFruits" required
+                                value="{{ mntfruits|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="NumWebPurchases">NumWebPurchases</label>
+                            <input type="number" step="0.01" class="form-control" id="NumWebPurchases"
+                                name="NumWebPurchases" required value="{{ newwebpurchases|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="NumCatalogPurchases">NumCatalogPurchases</label>
+                            <input type="number" step="0.1" class="form-control" id="NumCatalogPurchases" name="NumCatalogPurchases" required
+                                value="{{ numcatalogpurchases|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                        <div class="form-group mb-4">
+                            <label for="NumStorePurchases">NumStorePurchases</label>
+                            <input type="number" step="0.1" class="form-control" id="NumStorePurchases" name="NumStorePurchases" required
+                                value="{{ numstorepurchases|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                        <div class="form-group mb-4">
+                            <label for="NumWebVisitsMonth">NumWebVisitsMonth</label>
+                            <input type="number" step="0.1" class="form-control" id="NumWebVisitsMonth" name="NumWebVisitsMonth" required
+                                value="{{ numwebvisitsmonth|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                        <div class="form-group mb-4">
+                            <label for="Complain">Complain</label>
+                            <input type="number" step="0.1" class="form-control" id="Complain" name="Complain" required
+                                value="{{ complain|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row-reverse pr-3">
+                <button type="submit" class="btn btn-primary"><span>Check Bank Churn</span></button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

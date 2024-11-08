@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styling for the page */
+        body {
+            background-color: #f4f6f9;
+            background-image: url('https://media.licdn.com/dms/image/v2/D4D12AQF21rqnGo5gxA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1708240861592?e=1735776000&v=beta&t=xzEkZ3crn-zbGROxV1rvGRWmAtkWoFBUFi9oZXg2rUQ');
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+        }
+    
+        .container {
+            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.8); /* Adds a slight transparency to make text more readable */
+            padding: 20px;
+            border-radius: 10px;
+        }
+    
+        .card-body {
+            text-align: center;
+        }
+    
+        .url-list {
+            margin-top: 30px;
+        }
+    
+        .url-list li {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+    
+        .list-group-item {
+            border: 1px solid #f4f6f9;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="text-center">
+            <h2>ADDY</h2>
+        </div>
+        <div class="">
+            <ul class="url-list ">
+                {% for route in routes %}
+                <li class="list-group-item">
+                    <strong>{{ route.endpoint }}</strong> - <a href="{{ route.url }}">{{ route.url }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>

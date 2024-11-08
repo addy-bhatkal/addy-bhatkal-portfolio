@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Recommender</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary,
+        .bg-primary,
+        .text-primary,
+        .navbar-dark .navbar-nav .nav-link.active {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+        }
+
+        .btn-primary:hover,
+        .bg-primary:hover {
+            background-color: #ffdd57 !important;
+        }
+
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        .doodle-background {
+            background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/doodles.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .content-wrapper {
+            padding: 50px 0;
+        }
+
+        .container.center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form-wrapper {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .list-group-item {
+            background-color: #ffffff;
+            border: 1px dotted #ddd;
+        }
+
+        h1 {
+            color: #ffc107;
+            font-size: 40px;
+            font-family: sans-serif;
+        }
+
+        label {
+            font-weight: bold;
+            color: rgb(117, 117, 117);
+        }
+
+        .white-span {
+            font-weight: bold;
+            color: #fdfdfd;
+        }
+    </style>
+</head>
+
+<body class="doodle-background">
+
+    <div class="container center">
+        <div class="row justify-content-center">
+            <h1 class="col-md-6 mb-4">Find Similar Songs</h1>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" class="form-wrapper">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" id="song" name="song" class="form-control" placeholder="Enter song name"
+                            required value="{{ song|default:'' }}">
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="white-span">Get Recommendations</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            {% if similar_songs %}
+            <div class="row">
+                <div class="col-md-6 mx-auto mt-3">
+                    <ul class="list-group">
+                        {% for song in similar_songs %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ song.0 }}</span>
+                            <span class="text-muted">{{ song.1 }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary,
+        .bg-primary,
+        .text-primary,
+        .navbar-dark .navbar-nav .nav-link.active {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+            color: #000 !important;
+        }
+
+        .btn-primary:hover,
+        .bg-primary:hover {
+            background-color: #ffdd57 !important;
+        }
+
+        .container.center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        label {
+            font-weight: bold;
+            color: rgb(209, 201, 201);
+        }
+
+        body {
+            background-color: #f1f1f1;
+            background-image: url('data:image/jpeg;base64,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');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: #ffc107;
+            font-size: 40px;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container center">
+        <h1 class="mt-5 ml-2">Diabetes Prediction</h1>
+
+        <!-- Display result message -->
+        {% if result %} 
+        <div class="alert alert-{{ result_class }}">
+            {{ result }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container my-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Pregnancies">Pregnancies (eg:1,2,3)</label>
+                            <input type="number" class="form-control" id="Pregnancies" name="Pregnancies" required
+                                value="{{ pregnancies|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Glucose">Glucose (eg 70 - 100)</label>
+                            <input type="number" class="form-control" id="Glucose" name="Glucose" required
+                                value="{{ glucose|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="BloodPressure">Blood Pressure</label>
+                            <input type="number" class="form-control" id="BloodPressure" name="BloodPressure" required
+                                value="{{ blood_pressure|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Age">Age</label>
+                            <input type="number" class="form-control" id="Age" name="Age" required
+                                value="{{ age|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="SkinThickness">Skin Thickness</label>
+                            <input type="number" class="form-control" id="SkinThickness" name="SkinThickness" required
+                                value="{{ skin_thickness|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Insulin">Insulin</label>
+                            <input type="number" class="form-control" id="Insulin" name="Insulin" required
+                                value="{{ insulin|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="BMI">BMI</label>
+                            <input type="number" step="0.1" class="form-control" id="BMI" name="BMI" required
+                                value="{{ bmi|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="DiabetesPedigreeFunction">Diabetes Pedigree Function</label>
+                            <input type="number" step="0.01" class="form-control" id="DiabetesPedigreeFunction"
+                                name="DiabetesPedigreeFunction" required value="{{ diabetes_pedigree|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row-reverse pr-3">
+                <button type="submit" class="btn btn-primary"><span>Check Diabetes</span></button>
+            </div>
+        </form>
+
+        hola AB
+    </div>
+
+</body>
+
+</html>

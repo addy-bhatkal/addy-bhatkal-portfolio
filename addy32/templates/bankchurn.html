@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Churn Prediction</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary,
+        .bg-primary,
+        .text-primary,
+        .navbar-dark .navbar-nav .nav-link.active {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+            color: #000 !important;
+        }
+
+        .btn-primary:hover,
+        .bg-primary:hover {
+            background-color: #ffdd57 !important;
+        }
+
+        .container.center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        label {
+            font-weight: bold;
+            color: rgb(117, 117, 117);
+        }
+
+        body {
+            background-color: #f1f1f1;
+        }
+
+        h1 {
+            color: #ffc107;
+            font-size: 40px;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container center">
+        <h1 class="mt-5 ml-2 ">Bank Churn Prediction</h1>
+
+        <!-- Display result message -->
+        {% if result %}
+        <div class="alert alert-{{ result_class }}">
+            {{ result }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container my-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="CreditScore">CreditScore (Range 350-850) </label>
+                            <input type="number" class="form-control" id="CreditScore" name="CreditScore" required
+                                value="{{ creditscore|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Gender">Gender (0=Female, 1=Male) </label>
+                            <input type="number" class="form-control" id="Gender" name="Gender" required
+                                value="{{ gender|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Age">Age</label>
+                            <input type="number" class="form-control" id="Age" name="Age" required
+                                value="{{ age|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Tenure">Tenure (Range 0-10)</label>
+                            <input type="number" class="form-control" id="Tenure" name="Tenure" required
+                                value="{{ tenure|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="Balance">Balance (Range 0-250000)</label>
+                            <input type="number" class="form-control" id="Balance" name="Balance" required
+                                value="{{ balance|default:'' }}">
+                        </div>
+                    </div>
+                     <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="NumOfProducts">NumOfProducts (Range 1-4)</label>
+                            <input type="number" step="0.01" class="form-control" id="NumOfProducts"
+                                name="NumOfProducts" required value="{{ numofproducts|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="HasCrCard">HasCrCard (0=NO, 1=YES) </label>
+                            <input type="number" step="0.01" class="form-control" id="HasCrCard"
+                                name="HasCrCard" required value="{{ hasacard|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="IsActiveMember">IsActiveMember (0=NO, 1=YES)</label>
+                            <input type="number" step="0.01" class="form-control" id="IsActiveMember"
+                                name="IsActiveMember" required value="{{ isaactivemember|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-4">
+                            <label for="EstimatedSalary">EstimatedSalary (Range 12-199990)</label>
+                            <input type="number" step="0.01" class="form-control" id="EstimatedSalary"
+                                name="EstimatedSalary" required value="{{ estimatedsalary|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="d-flex flex-row-reverse pr-3">
+                <button type="submit" class="btn btn-primary"> <span>Check Churn</span></button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
