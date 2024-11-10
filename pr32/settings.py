@@ -32,7 +32,7 @@ STATICFILES_DIRS = [
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['209.74.64.50', 'addybhatkal.com']
+ALLOWED_HOSTS = ['209.74.64.50', 'addybhatkal.com', '127.0.0.1']
 
 
 # Application definition
