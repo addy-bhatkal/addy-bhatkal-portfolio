@@ -28,6 +28,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://addybhatkal.com']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
