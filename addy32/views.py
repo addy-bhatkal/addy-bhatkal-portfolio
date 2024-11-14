@@ -2,21 +2,26 @@ from django.shortcuts import render
 import pickle 
 import sklearn
 import pandas as pd
-
+import warnings
 from django.contrib import messages
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
+from mlxtend.frequent_patterns import association_rules
+from mlxtend.frequent_patterns import apriori
 
 
 
 def home(request):
     routes = [
-        {'endpoint': 'diabetes', 'url': 'diabetes/'},
-        {'endpoint': 'nclassifier', 'url': 'nclassifier/'},
-        {'endpoint': 'recommend_songs', 'url': 'recommend_songs/'},
-        {'endpoint': 'customerbuyin', 'url': 'customerbuyin/'},
-        {'endpoint': 'bankchurn', 'url': "bankchurn/"}
+        {'endpoint': 'Diabetes Predictor (Decision Tree Classifier)', 'url': 'diabetes/','image':'images/diabetes2.png'},
+        {'endpoint': 'News Category Classifier (Count Vectorizer + Naive Bayes)', 'url': 'nclassifier/', 'image':'images/news3.png'},
+        {'endpoint': 'Song Recommender (Term Frequency-Inverse Document Frequency + Cosine Similarity)', 'url': 'recommend_songs/', 'image':'images/song2.png'},
+        {'endpoint': 'Customer Marketing Campaign Buy-in (Light Gradient Boost)', 'url': 'customerbuyin/', 'image':'images/cby2.png'},
+        {'endpoint': 'Bank Credit Card Customer Churn (Logistic Regression)', 'url': "bankchurn/", 'image':'images/bank.png'},
+        {'endpoint': 'Frequently Bought Items', 'url': "arm/", 'image':'images/arm.png'},
+        {'endpoint': 'Movie Recommender', 'url': "movierecommender/", 'image':'images/movierecommender.png'}
+        
 
         
     ]
@@ -27,7 +32,7 @@ with open('diabetes_predictor.sav', 'rb') as f2:
 
 def infer_diabetes(ip_data): #ML part of code
     prob = load_model.predict_proba(ip_data)[0][1]
-    return load_model.predict(ip_data)[0] == 1, f"The probability with which you will suffer from diabetes is: {prob*100 :.2f} %"
+    return load_model.predict_proba(ip_data)[0][1] >0.3, f"The probability with which you will suffer from diabetes is: {prob*100 :.2f} %"
 
 def diabetes(request): #HTML part of code
     context = dict()
@@ -38,7 +43,7 @@ def diabetes(request): #HTML part of code
     if request.method == 'POST':
         try:
             pregnancies = int(request.POST['Pregnancies'])
-            glucose = int(request.POST['Glucose'])
+            glucose = float(request.POST['Glucose'])
             blood_pressure = int(request.POST['BloodPressure'])
             skin_thickness = int(request.POST['SkinThickness'])
             insulin = int(request.POST['Insulin'])
@@ -232,4 +237,63 @@ def bankchurn(request):
 
     return render(request, 'bankchurn.html', context)
 
+df2 = pd.read_csv('ARM - Bakery.csv')
+df2['Items'] = df2['Items'].replace({
+    'Hot chocolate': 'Hot Chocolate'
+    
+})
 
+
+def arm_ML(prod):
+    df2['Items'] = df2['Items'].str.strip()
+    basket = df2.groupby(['TransactionNo','Items'])['DateTime'].sum().unstack().reset_index().fillna(0).set_index('TransactionNo')
+    def encode(y):
+        if y== 0:
+            return 0
+        if y!= 0:
+            return 1
+    basket = basket.map(encode)
+    freq = apriori(basket, min_support=0.005, use_colnames=True)
+    rules = association_rules(freq, freq['itemsets'], metric='lift', min_threshold=1)
+    rules2 = rules.sort_values(by='lift', ascending = False)
+    df_rules = rules2.reset_index()
+    idx = [i for i in range(df_rules.shape[0])]
+    df3 = df_rules[['antecedents', 'consequents']].iloc[idx,:].reset_index().drop('index', axis = 1)
+    df3['antecedents'] = df3['antecedents'].apply(lambda x: ', '.join(list(x)))
+    df3['consequents'] = df3['consequents'].apply(lambda x: ', '.join(list(x)))
+    df3.head()
+    return list(df3[df3['antecedents']==prod]['consequents'])
+
+def arm(request):
+    product = None
+    similar_products = None
+
+    if request.method == 'POST':
+        product = request.POST.get('product', '')
+        similar_products = arm_ML(product)
+        print(similar_products)
+
+    return render(request, 'arm.html', {'product': product, 'similar_products': similar_products})
+
+
+
+movie = pd.read_csv('moviesrecom.csv')
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+
+def movierecom_ML(moviename):
+    movie_res = movie.corrwith(movie[moviename]).sort_values(ascending=False)
+    movie_res2 = pd.DataFrame(movie_res, columns=['corr'])
+    movie_listy = []
+    return list(movie_res2[movie_res2['corr']<1.01])
+
+def movierecom(request): 
+    movie = None
+    similar_movie = None
+
+    if request.method == "POST":
+        movie = request.POST.get('movie', '')
+        if movie:  # Ensure movie is not empty
+            similar_movie = movierecom_ML(movie)
+            print(similar_movie)
+
+    return render(request, 'movierecommender.html', {'movie': movie, 'similar_movie': similar_movie if similar_movie is not None else []})

@@ -49,7 +49,9 @@
 				<div class="col-md-10 text-center pt-5">
 
 					<h1 class="site-heading site-animate">Hello, I'm <strong class="d-block">Aditya Bhatkal</strong></h1>
-					<strong class="d-block text-white text-uppercase letter-spacing">and this is My Rezume</strong>
+					<strong class="d-block text-white text-uppercase letter-spacing">...a jr. data scientist</strong>
+					<strong class="d-block text-white text-uppercase letter-spacing">Welcome to my playground.ie my website that brings my math models and algos to you. Experiment! Nerd out! Knock Yourself out! </strong>
+					
 
 				</div>
 			</div>
@@ -78,7 +80,7 @@
 				</ul>
 			</div> -->
 
-			<div class="filters-content">
+			<!-- <div class="filters-content">
 				<div class="row grid">
 					{% for route in routes %}
 					<div class="single-portfolio col-sm-4 all mockup">
@@ -102,7 +104,55 @@
 					{% endfor %}
 					
 				</div>
+			</div> -->
+			<!-- <div class="filters-content">
+				<div class="row grid">
+					{% for route in routes %}
+					<div class="single-portfolio col-sm-4 all mockup">
+						<div class="relative">
+							<div class="thumb">
+								<div class="overlay overlay-bg"></div>
+								<!-- Dynamically load images for each route -->
+								<!-- <img class="image img-fluid" src="{% static route.image %}" alt="">
+							</div>
+							<a href="{% static route.image %}" class="img-pop-up">
+								<div class="middle">
+									<div class="text align-self-center d-flex"><img src="{% static 'images/preview.png' %}" alt=""></div>
+								</div>
+							</a>                                  
+						</div>
+						<div class="p-inner">
+							<h4>{{ route.endpoint }}</h4>
+							<div class="cat"><a href="{{ route.url }}">{{ route.url }}</a></div>
+						</div>                                         
+					</div>
+					{% endfor %}
+				</div> --> -->
+
+				<div class="filters-content">
+					<div class="row grid">
+						{% for route in routes %}
+						<div class="single-portfolio col-sm-4 all mockup">
+							<div class="relative">
+								<div class="thumb">
+									<div class="overlay overlay-bg"></div>
+									<!-- Dynamically load images and link each image to its respective URL -->
+									<a href="{{ route.url }}">
+										<img class="image img-fluid" src="{% static route.image %}" alt="">
+									</a>
+								</div>
+								<div class="p-inner">
+									<h4>{{ route.endpoint }}</h4>
+									<div class="cat"><a href="{{ route.url }}">{{ route.url }}</a></div>
+								</div>                                         
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				
 			</div>
+			
 		</div>
 	</section>
 	<!-- .section -->

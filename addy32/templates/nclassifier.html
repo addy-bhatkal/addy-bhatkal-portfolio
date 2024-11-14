@@ -12,36 +12,35 @@
         .bg-primary,
         .text-primary,
         .navbar-dark .navbar-nav .nav-link.active {
-            background-color: #ffc107 !important;
-            border-color: #ffc107 !important;
+            background-color: #000000 !important;
+            border-color: #000000 !important;
         }
 
         .btn-primary:hover,
         .bg-primary:hover {
-            background-color: #ffdd57 !important;
+            background-color: #32648a !important;
         }
+
+        {% load static %}
 
         body {
-            background-color: #f7f7f7;
-            font-family: 'Arial', sans-serif;
-            color: #333;
-        }
-
-        .doodle-background {
-            background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/doodles.png');
+            background-color: #000000;
+            background-image: url("{% static 'images/news_page.png' %}");
             background-size: cover;
             background-position: center;
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
         }
 
         .content-wrapper {
-            padding: 50px 0;
+            padding: 150px 0;
         }
 
         .container.center {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100vh;
+            padding: 100;
         }
 
         .form-wrapper {
@@ -55,10 +54,10 @@
             border: 1px dotted #ddd;
         }
 
-        h1 {
-            color: #ffc107;
-            font-size: 40px;
+        h1, h3 {
+            color: #fcfcfc;
             font-family: sans-serif;
+            margin-bottom: 100;
         }
 
         .navbar-dark .navbar-brand {
@@ -74,46 +73,91 @@
             font-weight: bold;
             color: #fdfdfd;
         }
+
+        .text-white {
+            color: white;
+        }
+
+        .list-item {
+            margin-left: 20px;
+        }
+
+        /* Adjusting the position of the header and form */
+        .header-container {
+            margin-top: 90px;  /* Move the header and box up */
+            margin-bottom: 20px;  /* Space between header and box */
+        }
+
+        .form-wrapper {
+            margin-top: 20px; /* Space between the form and explanatory text */
+        }
+
     </style>
 </head>
 
-<body class="doodle-background">
+<body>
 
     <div class="container center">
-        <div class="row justify-content-center">
-            <h1 class="col-md-6 mb-4">News Article Classifier</h1>
+        <!-- Title Section -->
+        <div class="header-container row justify-content-center">
+            <div class="col-md-12 text-center">
+                <h1 class="d-inline">News Article Classifier</h1>
+                <h3 class="d-inline"> - Document Classification + Naive Bayes Algo</h3> <br> <br>
+                <h4 class="d-inline"> This is a Sentiment Analysis-like algorithm that classifies sub-genres of news categories basis a news headline </h4> <br> <br>
+                <h5 class="d-inline"> (Only the following 4 categories will show up for now - Finance, GeoPolitics, Sci-Tech, Sports)</h5>
+            </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form method="POST" class="form-wrapper"> 
-                    <!-- hjfksdzhl -->
+
+        <!-- Form Section -->
+        <div class="row justify-content-center mt-6"> <!-- Added mt-5 to increase the gap -->
+            <div class="col-md-10">
+                <form method="POST" class="form-wrapper">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <input type="text" id="article" name="article" class="form-control" placeholder="Enter your article"
-                            required value="{{ article|default:'' }}">
+                        <input type="text" id="article" name="article" class="form-control" placeholder="Enter Any News Article 'Headline' That Comes To Mind Here" required value="{{ article|default:'' }}">
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="white-span">Classify the Article</span>
-                        </button>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                        <button type="submit" class="btn btn-primary"><span class="white-span">Classify the Article</span></button>
                     </div>
                 </form>
             </div>
-
-            {% if result %} 
-            <div class="row">
-                <div class="col-md-6 mx-auto mt-3">
-                    <div class="alert alert-info" role="alert">
-                        <strong>Predicted Classification: </strong> {{ result }}
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-
         </div>
     </div>
 
+    <!-- Result Section -->
+    {% if result %}
+    <div class="row mt-3">
+        <div class="col-md-6 mx-auto">
+            <div class="alert alert-info" role="alert">
+                <strong>Predicted Classification: </strong> {{ result }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+ <!-- Explanatory Section -->
+<div class="row mt-5 justify-content-end"> <!-- Added justify-content-end to move the content to the right -->
+    <div class="col-md-10 ml-auto"> <!-- Reduced the width to avoid full width and create space on the left -->
+        <h5 class="text-white">About: This algo uses a Count Vectorizer to convert words in articles into a matrix of word frequencies. </h5>
+        <h5 class="text-white">It then uses a Naive Bayes algorithm to assign a Probability score of your entered text v/s each category. </h5>
+        <h5 class="text-white">The category with the higest assigned probability wins! (And that's the result you see). </h5> <br> 
+        <h5 class="text-white">Use cases:  </h5>
+        <h7>- Twitter (X) tweets sentiment analysis: Positive, Negative, Neutral! </h7> <br>
+        <h7>- Election Recommender: Voter sentiment towards a party basis sentiment analysis of multiple news articles in a region</h7> <br>
+        <h7>- HR Candidate Recommender system: Company Job Descriptions v/s Candidate resumes - Good fit v/s Not a good fit </h7> <br>
+        <h7>- Intent Classification: In chatbot systems, classifying user queries into specific intents (e.g., "book a flight", "check weather"). </h7> <br>
+        <h7>- Document Categorization: Classifying legal or financial documents into categories like contracts, invoices, reports, etc. </h7> <br>
+        <h7>- Product Categorization: Categorizing product descriptions in e-commerce platforms (e.g., "electronics", "clothing", "home goods"). </h7> <br>
+        <h7>- Author Identification: Determining the author of a document based on writing style or specific word choices.
+        </h7> <br>
+
+</div>
+
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

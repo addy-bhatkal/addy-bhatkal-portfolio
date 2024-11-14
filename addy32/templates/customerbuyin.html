@@ -1,3 +1,5 @@
+<!-- Can you align the 11 boxes correctly and place the check bank churn button in a suitable position in this code? 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,10 +34,11 @@
             font-weight: bold;
             color: rgb(255,255,255);
         }
+        {% load static %}
 
         body {
             background-color: #f1f1f1;
-            background-image: url('https://www.greentek.eu/media/images/3BestMethodsToCreateAnEnergyEfficientSupermarket_5.png');
+            background-image: url("{% static 'images/cby11_copy.png' %}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -54,8 +57,8 @@
     <div class="container center">
         <h1 class="mt-5 ml-2">Customer Buy-In Prediction</h1>
 
-        <!-- Display result message -->
-        {% if result %} 
+        Display result message -->
+        <!-- {% if result %} 
         <div class="alert alert-{{ result_class }}">
             {{ result }}
         </div>
@@ -151,6 +154,201 @@
             <div class="d-flex flex-row-reverse pr-3">
                 <button type="submit" class="btn btn-primary"><span>Check Bank Churn</span></button>
             </div>
+        </form>
+    </div>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Buy-in Prediction (Algo: Support Vector Machines) </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-primary,
+        .bg-primary,
+        .text-primary,
+        .navbar-dark .navbar-nav .nav-link.active {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+            color: #000 !important;
+        }
+
+        .btn-primary:hover,
+        .bg-primary:hover {
+            background-color: #6a520c !important;
+        }
+
+        label {
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+        }
+
+        {% load static %}
+
+        body {
+            background-color: #f1f1f1;
+            background-image: url("{% static 'images/cby11_copy.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: #ffc107;
+            font-size: 40px;
+            font-family: sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .submit-button {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center mt-5">Customer Buy-In Prediction (Algo: Support Vector Machines)</h1>
+
+        <!-- Display result message -->
+        {% if result %}
+        <div class="alert alert-{{ result_class }}">
+            {{ result }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container my-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Education">Education (eg:1,2,3)</label>
+                            <input type="number" class="form-control" id="Education" name="Education" required value="{{ education|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Marital_Status">Marital Status</label>
+                            <input type="number" class="form-control" id="Marital_Status" name="Marital_Status" required value="{{ maritalstatus|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Income">Income</label>
+                            <input type="number" class="form-control" id="Income" name="Income" required value="{{ income|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Kidhome">Kidhome</label>
+                            <input type="number" class="form-control" id="Kidhome" name="Kidhome" required value="{{ kidhome|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Teenhome">Teenhome</label>
+                            <input type="number" class="form-control" id="Teenhome" name="Teenhome" required value="{{ teenhome|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="MntFruits">MntFruits</label>
+                            <input type="number" class="form-control" id="MntFruits" name="MntFruits" required value="{{ mntfruits|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="NumWebPurchases">Num Web Purchases</label>
+                            <input type="number" class="form-control" id="NumWebPurchases" name="NumWebPurchases" required value="{{ newwebpurchases|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="NumCatalogPurchases">Num Catalog Purchases</label>
+                            <input type="number" class="form-control" id="NumCatalogPurchases" name="NumCatalogPurchases" required value="{{ numcatalogpurchases|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="NumStorePurchases">Num Store Purchases</label>
+                            <input type="number" class="form-control" id="NumStorePurchases" name="NumStorePurchases" required value="{{ numstorepurchases|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="NumWebVisitsMonth">Num Web Visits Month</label>
+                            <input type="number" class="form-control" id="NumWebVisitsMonth" name="NumWebVisitsMonth" required value="{{ numwebvisitsmonth|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Complain">Complain</label>
+                            <input type="number" class="form-control" id="Complain" name="Complain" required value="{{ complain|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit button aligned to center -->
+                <div class="row submit-button">
+                    <div class="col-md-12 d-flex justify-content-between align-items-center">
+                        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                        <div></div>
+                        <button type="submit" class="btn btn-primary"><span>Check Bank Churn</span></button>
+                    </div>
+                </div>
+<!-- 
+
+                <div class="d-flex justify-content-between">
+                <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                <button type="submit" class="btn btn-primary"> <span>Check Churn</span></button>
+            </div> -->
+
+                    <div class="explanatory-text">
+                        <style>
+                            .explanatory-text {
+                                color: white;
+                                margin-top: 40px;
+                            }
+                        
+                            .explanatory-text h5 {
+                                font-size: 18px;
+                                font-weight: bold;
+                            }
+                        
+                            .explanatory-text p {
+                                font-size: 16px;
+                                margin-bottom: 0.5rem; /* Reduce the space between paragraphs */
+                            }
+                        </style>
+                        
+                        <h5>I created this model with a 'Support Vector Machine Classifier' algo on a dataset of 2.3k customer purchases in a superstore  </h5> <br>
+                        <h7>- I tested this using models like Support Vector machines (accuracy: 83.25%) Gradient Boost Classifier (accuracy: 82.07%), Decision Tree Classifier (accuracy: 80.81%), Logistic Regression Classifier (accuracy: 81.38%)</h7> <br>
+                        <h7>- I choose this model because of its high accuracy score compared to other models above and for a consistent accuracy score across multiple combinations/splits of data. (Cross validation)</h7> <br> <br>
+                        <h5>I used Recursive Feature Elimination (RFE) to identify the most important features/predictors .</h5>
+                        <h7>- This happens by testing the model by recursively elimintaing one predictor after another to get the best predictors</h7> <br>
+                        <h7>- While in a model like SVC it is sometimes difficult to predict which predictors had more influence than the others the above combination of 11 predictors gave the highest accuracy score  </h7>
+        
+                </div>
         </form>
     </div>
 

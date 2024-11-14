@@ -28,7 +28,9 @@ urlpatterns = [
     path("nclassifier/", views.nclassifier, name = 'nclassifier'),
     path("recommend_songs/", views.song_reco, name = 'song_reco'),
     path("customerbuyin/", views.cby, name = 'customerbuyin'),
-    path('bankchurn/', views.bankchurn, name = 'bankchurn')
+    path('bankchurn/', views.bankchurn, name = 'bankchurn'),
+    path('arm/', views.arm, name = 'arm'),
+    path('movierecommender/', views.movierecom, name = 'movierecommender')
 ] +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

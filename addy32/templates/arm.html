@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Bought Items Recommender</title>
+    <style>
+        .btn-primary,
+        .bg-primary,
+        .text-primary,
+        .navbar-dark .navbar-nav .nav-link.active {
+            background-color: #0b5595 !important;
+            border-color: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        .btn-primary:hover,
+        .bg-primary:hover {
+            background-color: #2373b9 !important;
+        }
+
+        .container.center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        label {
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+        }
+
+        {% load static %}
+
+        body {
+            background-color: #f1f1f1;
+            background-image: url("{% static 'images/arm_bg.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: white; /* Change all font color to white */
+        }
+
+        h1 {
+            color: #e3e0d5;
+            font-size: 40px;
+            font-family: sans-serif;
+            padding-top: 60px; /* Added padding from the top */
+        }
+
+
+
+        .form-box {
+            background-color: rgba(0, 0, 0); 
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+
+<!-- Bootstrap CSS for styling -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<body>
+
+    <div class="container mt-5">
+        <!-- Title -->
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1 style="color: #ffffff;">Walmart 'Frequently Bought Items' Recommender</h1> <br>
+                <h5 style="color: #ffffff;"> Choose any grocery item from the dropdown list below to get other frequently purchased items </h5> 
+                <div class="list-box">
+                    <h6 style="color: #ffffff;">
+                        Note: This is an inexhaustive list ie A LOT more items can be added to this basis additional consumer data.
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+<!-- Form Section -->
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="form-box">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="product" class="form-label">Product</label>
+                    <div class="input-group">
+                        <select id="product" name="product" class="form-select" required>
+                            <option value="" disabled selected>Select a product</option>
+                            <option value="Coke">Coke</option>
+                            <option value="Sandwich">Sandwich</option>
+                            <option value="Juice">Juice</option>
+                            <option value="Cookies">Cookies</option>
+                            <option value="Cake">Cake</option>
+                            <option value="Coffee, Hot Chocolate">Coffee, Hot Chocolate</option>
+                            <option value="Soup">Soup</option>
+                            <option value="Coffee, Cake">Coffee, Cake</option>
+                            <option value="Hot Chocolate">Hot Chocolate</option>
+                            <option value="Coffee, Tea">Coffee, Tea</option>
+                            <option value="Tea">Tea</option>
+                            <option value="Pastry">Pastry</option>
+                            <option value="Medialuna">Medialuna</option>
+                            <option value="Scone">Scone</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Keeping It Local">Keeping It Local</option>
+                            <option value="Toast">Toast</option>
+                            <option value="Coffee, Bread">Coffee, Bread</option>
+                            <option value="Salad">Salad</option>
+                            <option value="Alfajores">Alfajores</option>
+                            <option value="Hot Chocolate, Cake">Hot Chocolate, Cake</option>
+                            <option value="Spanish Brunch">Spanish Brunch</option>
+                            <option value="Muffin">Muffin</option>
+                            <option value="Brownie">Brownie</option>
+                            <option value="Tiffin">Tiffin</option>
+                            <option value="Hearty & Seasonal">Hearty & Seasonal</option>
+                            <option value="Jammie Dodgers">Jammie Dodgers</option>
+                            <option value="Bread">Bread</option>
+                            <option value="Jam">Jam</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Get Recommendations</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Results Section -->
+        {% if similar_products %}
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <h5 style="color: #ffffff;"> Items that were frequently purchased with "{{ product }}" in descending order of frequency</h5>
+                <ul class="list-group">
+                    {% for item in similar_products %}
+                    <li class="list-group-item">{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+     <!-- Explanatory Section -->
+     <div class="row mt-5"> <!-- Added justify-content-end to move the content to the right -->
+        <div class="col-md-2"></div>
+        <div class="col-md-10"> <!-- Reduced the width to avoid full width and create space on the left -->
+            <div class="mt-0 d-flex justify-content-between"> 
+                <!-- Transparent box with a hyperlink -->
+                <a href="{% url 'home' %}"  class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+                    Back To Home
+                </a>
+                <a href="{% url 'home' %}" class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-right: 230px;"">
+                    Github link to the source code
+                </a>
+            </div>
+            <br> <br>            
+        <h5 class="text-white"> About this algo: </h5> 
+        <h6 class="text-white">- This is a data mining algorithm (Association Rule Mining) that discovers associations or relationships/patterns within large datasets. </h6>
+        <h6 class="text-white">- The underlying structure of this model aims to give the result:  "If A then B".  </h6>
+        <h6 class="text-white">- The metric I used to calculate this is 'lift' which is ratio of "how often is B purchased when A is definitely purchased" to "how often are they indpepndently purchased"  </h6> 
+        <h6 class="text-white">- This results in associations between common items </h6> <br> 
+        <h5 class="text-white">Use cases:  </h5>
+        <h7 class="text-white">- Healthcare: If disease/symptom 'A' occurs then here is the list of disease/symptoms 'B' that could also occur! </h7> <br>
+        <h7 class="text-white">- Media and Streaming: The infamous 'You may also like' section on Netflix is a perfect use case here </h7> <br> 
+        <h7 class="text-white">- Market Basket Analysis: Discover patterns in customer purchases (e.g., customers who buy bread often buy butter). </h7> <br>
+        <h7 class="text-white">- Reel Recommendations: Analyze user behavior on websites to find common navigation patterns (e.g., users visiting page A often visit page B).  </h7> <br> 
+        <h7 class="text-white">- Recommender Systems: Generate product or service recommendations (e.g., customers who liked one movie also liked another). </h7> <br> 
+        <h7 class="text-white">- Supply Chain Management: Optimize inventory by finding frequently co-ordered products.  </h7> <br> 
+        <h7 class="text-white">- E-learning: Identify common learning paths or materials frequently used together by students. </h7> <br> 
+        <h7 class="text-white">- Insurance: Identify commonly claimed risks or frequently bundled insurance packages. </h7> <br> 
+        <h7 class="text-white">- Inventory Management: Predict product demands by identifying associations between items frequently bought together.  </h7> <br> 
+        <h7 class="text-white"> <br>
+        <h5 class="text-white">What does the underlying Dataset look like?:  </h5>
+        <h7 class="text-white"> -This is a base level dataset of customer transactions and all the items purchased by them </h7> <br>
+        <h7 class="text-white"> - It entails a column of the transaction id, the items bought on that id, date and time of the day and weekday or weekend.  </h7> <br>
+    
+
+</div>
+
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

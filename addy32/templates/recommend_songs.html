@@ -12,36 +12,39 @@
         .bg-primary,
         .text-primary,
         .navbar-dark .navbar-nav .nav-link.active {
-            background-color: #ffc107 !important;
-            border-color: #ffc107 !important;
+            background-color: #242321 !important;
+            border-color: #000000 !important;
         }
 
         .btn-primary:hover,
         .bg-primary:hover {
-            background-color: #ffdd57 !important;
+            background-color: #154fa6 !important;
         }
+
+        {% load static %}
 
         body {
             background-color: #f7f7f7;
+            background-image: url("{% static 'images/song111.png' %}");
             font-family: 'Arial', sans-serif;
-            color: #333;
+            color: #ffffff;
         }
 
         .doodle-background {
-            background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/doodles.png');
             background-size: cover;
             background-position: center;
         }
 
         .content-wrapper {
-            padding: 50px 0;
+            padding: 15px 0;
         }
 
         .container.center {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
+            padding-top: 20px;
         }
 
         .form-wrapper {
@@ -55,15 +58,20 @@
             border: 1px dotted #ddd;
         }
 
+        .header-container {
+            margin-top: 150px;
+            margin-bottom: 10px;
+        }
+
         h1 {
-            color: #ffc107;
+            color: #ffffff;
             font-size: 40px;
             font-family: sans-serif;
         }
 
         label {
             font-weight: bold;
-            color: rgb(117, 117, 117);
+            color: rgb(252, 252, 252);
         }
 
         .white-span {
@@ -74,10 +82,15 @@
 </head>
 
 <body class="doodle-background">
-
     <div class="container center">
-        <div class="row justify-content-center">
-            <h1 class="col-md-6 mb-4">Find Similar Songs</h1>
+        <!-- Title Section -->
+        <div class="header-container row justify-content-center">
+            <div class="col-md-12 text-center">
+                <h2 class="d-inline">Song Recommender</h2>
+                <h4 class="d-inline"> - Term Frequency/Inverse Document Frequency + Cosine Similarity correlation score</h4> <br><br>
+                <h5 class="d-inline"> This algorithm (a personal favourite) is based on a limited database of 57,000 songs + their lyrics + their genres.  </h5> <br><br>
+                <h4 class="d-inline"> NOTE: This takes a few seconds to load!  </h4> <br><br>
+            </div>
         </div>
 
         <div class="row justify-content-center">
@@ -88,28 +101,59 @@
                         <input type="text" id="song" name="song" class="form-control" placeholder="Enter song name"
                             required value="{{ song|default:'' }}">
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="white-span">Get Recommendations</span>
-                        </button>
+
+                    <div class="row submit-button">
+                        <div class="col-md-12 d-flex justify-content-between align-items-center">
+                            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                            <div></div>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="white-span">Get Recommendations</span>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
 
             {% if similar_songs %}
-            <div class="row">
-                <div class="col-md-6 mx-auto mt-3">
+            <!-- Add headers for the song and artist columns -->
+            <div class="row mt-4">
+                <div class="col-md-6 mx-auto">
+                    <h3 class="text-center">Recommended Songs</h3>
+                    <div class="row mb-2">
+                        <div class="col-md-6 text-start font-weight-bold" style="font-size: 1.5rem;">Artist</div> <!-- Align 'Song' to the left -->
+                        <div class="col-md-6 text-end font-weight-bold" style="font-size: 1.5rem;">Song</div> <!-- Align 'Artist' to the right -->
+                    </div>
                     <ul class="list-group">
                         {% for song in similar_songs %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>{{ song.0 }}</span>
-                            <span class="text-muted">{{ song.1 }}</span>
+                            <span>{{ song.0 }}</span> <!-- Song -->
+                            <span class="text-muted">{{ song.1 }}</span> <!-- Artist -->
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
             {% endif %}
+
+         <!-- Explanatory Section -->
+<div class="row mt-5 justify-content-end"> <!-- Added justify-content-end to move the content to the right -->
+    <div class="col-md-10 ml-auto"> <!-- Reduced the width to avoid full width and create space on the left -->
+        <h5 class="text-white">About: This algo uses a Count Vectorizer to convert words in articles into a matrix of word frequencies. </h5>
+        <h5 class="text-white">It then uses a Naive Bayes algorithm to assign a Probability score of your entered text v/s each category. </h5>
+        <h5 class="text-white">The category with the higest assigned probability wins! (And that's the result you see). </h5> <br> 
+        <h5 class="text-white">Use cases:  </h5>
+        <h7>- Twitter (X) tweets sentiment analysis: Positive, Negative, Neutral! </h7> <br>
+        <h7>- Election Recommender: Voter sentiment towards a party basis sentiment analysis of multiple news articles in a region</h7> <br>
+        <h7>- HR Candidate Recommender system: Company Job Descriptions v/s Candidate resumes - Good fit v/s Not a good fit </h7> <br>
+        <h7>- Intent Classification: In chatbot systems, classifying user queries into specific intents (e.g., "book a flight", "check weather"). </h7> <br>
+        <h7>- Document Categorization: Classifying legal or financial documents into categories like contracts, invoices, reports, etc. </h7> <br>
+        <h7>- Product Categorization: Categorizing product descriptions in e-commerce platforms (e.g., "electronics", "clothing", "home goods"). </h7> <br>
+        <h7>- Author Identification: Determining the author of a document based on writing style or specific word choices.
+        </h7> <br>
+
+</div>
+
+
         </div>
 
     </div>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommender</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+            color: #000;
+        }
+
+        .content-wrapper {
+            padding: 10px 0;
+        }
+
+        .container.center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form-wrapper {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #000;
+            font-size: 40px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container center">
+        <!-- Title Section -->
+        <div class="header-container row justify-content-center">
+            <div class="col-md-12 text-center">
+                <h2>Movie Recommender</h2>
+                <h4>- Find similar movies based on the movie you enter</h4> 
+                <br> <br>
+                <h5>Enter the movie name below to get recommendations</h5>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" class="form-wrapper">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" id="movie" name="movie" class="form-control" placeholder="Enter movie name"
+                            required value="{{ movie|default:'' }}">
+                    </div>
+
+                    <div class="row submit-button">
+                        <div class="col-md-12 d-flex justify-content-between align-items-center">
+                            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                            <button type="submit" class="btn btn-primary">
+                                Get Recommendations
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {% if similar_movie %}
+            <div class="row">
+                <div class="col-md-6 mx-auto mt-3">
+                    <ul class="list-group">
+                        {% for movie in similar_movie %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ movie.0 }}</span> <!-- Movie name -->
+                            <span class="text-muted">Correlation: {{ movie.1 }}</span> <!-- Movie correlation -->
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
