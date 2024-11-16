@@ -40,10 +40,10 @@
                 {% endif %}
 
                 <!-- Direct Links to Pages 1-10 -->
-                {% for i in r %}
-                    <li class="page-item {% if page_obj.number == i %}active{% endif %}">
-                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                    </li>
+                   {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="?song={{ song }}&page={{ num }}">{{ num }}</a>
+                </li>
                 {% endfor %}
 
                 <!-- Next/Last Links -->
