@@ -8,33 +8,76 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f7f7f7;
-            font-family: 'Arial', sans-serif;
-            color: #000;
+
+
+.btn-primary,
+        .bg-primary,
+        .text-primary,
+        .navbar-dark .navbar-nav .nav-link.active {
+            background-color: #0b5595 !important;
+            border-color: #000000 !important;
+            color: #ffffff !important;
         }
 
-        .content-wrapper {
-            padding: 10px 0;
-        }
 
-        .container.center {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-        }
+{% load static %}
 
-        .form-wrapper {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 30px;
-        }
+/* body {
+    background-color: #f1f1f1;
+    background-image: url("{% static 'images/movie_bg.png' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    padding-bottom: 30px;
+}         */
 
-        h1 {
-            color: #000;
-            font-size: 40px;
-        }
+.container {
+    padding-top: 50px; /* Adjust this value to increase the gap */
+}
+
+body {
+    background-color: #f1f1f1;
+    background-image: url("{% static 'images/movie_bg.png' %}");
+    background-size: repeat; /* Ensures the image does not stretch */
+    background-position: center;
+    background-repeat: repeat;
+    padding-bottom: 50px;
+}
+
+
+.content-wrapper {
+    padding-top: 50px;
+
+    padding: 70px 0;
+}
+
+.container, .form-wrapper {
+    margin-bottom: 0px; /* Adjust this value to increase the gap */
+}
+
+.container.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Adjusts content to align at the top */
+    min-height: 100vh; /* Ensures the container covers the entire viewport, but grows if needed */
+    padding-top: 100px; /* Adjust this value to push the content lower */
+
+}
+
+.form-wrapper {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 40px;
+}
+
+h2, h4, h5 {
+color: #ffffff;  /* Set the text color to white */
+}
 
         label {
             font-weight: bold;
@@ -48,10 +91,9 @@
         <!-- Title Section -->
         <div class="header-container row justify-content-center">
             <div class="col-md-12 text-center">
-                <h2>Movie Recommender</h2>
-                <h4>- Find similar movies based on the movie you enter</h4> 
-                <br> <br>
-                <h5>Enter the movie name below to get recommendations</h5>
+                <h2>Movie Recommender (Algo: User Based Filtering + Correlation Score) </h2>
+                <h4>In this 'user-based content filtering' you get recommendations for similar movies basis movie-ratings of similar users:</h4> <br>
+                
             </div>
         </div>
 
@@ -65,8 +107,7 @@
                     </div>
 
                     <div class="row submit-button">
-                        <div class="col-md-12 d-flex justify-content-between align-items-center">
-                            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                        <div class="col-md-12 d-flex justify-content-end align-items-center">
                             <button type="submit" class="btn btn-primary">
                                 Get Recommendations
                             </button>
@@ -82,15 +123,103 @@
                         {% for movie in similar_movie %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span>{{ movie.0 }}</span> <!-- Movie name -->
-                            <span class="text-muted">Correlation: {{ movie.1 }}</span> <!-- Movie correlation -->
+                            
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
             {% endif %}
+
+
+        <div class="row mt-5"> <!-- Added justify-content-end to move the content to the right -->
+        <div class="col-md-2"></div>
+        <div class="col-md-10"> <!-- Reduced the width to avoid full width and create space on the left -->
+            <div class="mt-0 d-flex justify-content-between"> 
+                <!-- Transparent box with a hyperlink -->
+                <a href="{% url 'home' %}"  class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+                    Back To Home
+                </a>
+                <a href="https://github.com/addy-bhatkal/addybhatkal.com-All-The-Algos.git" class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-right: 230px;"
+                target="_blank">Github link to the source code</a>
+                    
+                </a>
+            </div>
+            <br> <br>  
         </div>
+
+
+        {% if page_obj %}
+        <div class="row">
+            <div class="col-md-6 mx-auto mt-3">
+                <ul class="list-group">
+                    {% for movie in page_obj %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ movie.0 }}</span> <!-- Movie name -->
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Pagination Controls -->
+        <div class="row mt-3">
+            <div class="col-md-6 mx-auto text-center">
+                <nav>
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        </li>
+                        {% endif %}
+        
+                        {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endfor %}
+        
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% endif %}
+        
+
+
+        <div class="row justify-content-end">
+            <div class="col-md-10 text-decoration">
+        <br>           
+        <h5 class="text-white"> About this algo: </h5> 
+        <h6 class="text-white">- I created this algo using a 'User Based Collaborative Filtering' mechanism on a dataset of 100,000 movie reviews. </h6>
+        <h6 class="text-white">- This method relies on users reviews as against knowledge about the underlying content. I applied a basic correlation score on a manipulated table of user ratings. </h6>
+        <h6 class="text-white">- The underlying 'limitation' of the math model - The same user must have rated multiple movies for a corelation score to be caculated on that movie.  </h6>
+        <h6 class="text-white">- This results in associations between common movies based on corelation scores </h6> <br> 
+        <h5 class="text-white"> Use cases of the underlying principle:  </h5>
+        <h7 class="text-white">- Media: Recommending similar movies to users as done on Netflix/Amazon Prime/HBO/Apple TV </h7> <br>
+        <h7 class="text-white">- Music Recommender: Spotify like algorithm to suggest similar songs based on users picks!</h7> <br>
+        <h7 class="text-white">- TV Series Recommendations: Very similar to movie recommendations based on similar user’s interests </h7> <br>
+        <h7 class="text-white">- Restaurant Recommendations: Apps like Yelp, Uber Eats, Liefrando, Zomato, Grubhub, Grab, Foodpanda heavily rely on users reviews to suggest restaurants to other users </h7> <br>
+        <h7 class="text-white">- Travel Recommendations: Which could go hand in hand with the above especially when travellers leave reviews for non-touristy spots. Additionally, A text mining algo to classify the sentiment could be fit here. Note: I have coded a similar text mining algo right here: </h7> <br>
+        <h7 class="text-white">- News and Article Recommendations: This can be used to identify a correlation score with the same user’s existing past reading history as against relying on other similar users.</h7> <br>
+        <h7 class="text-white">- Instagram Feed recommendations:  Similar principle to the news articles corelation</h7> <br>
+        <h7 class="text-white">- Job Matching in HR: Suggesting similar job applicants basis successfully filtered candidates</h7> <br>
+        
+        <h7 class="text-white"> <br>
+        <h5 class="text-white">Dataset: What does the underlying data look like?:  </h5>
+        <h7 class="text-white"> -This is a base level dataset of customer transactions and all the items purchased by them </h7> <br>
+        <h7 class="text-white"> - It entails a column of the transaction id, the items bought, time of the day and Bought on a Weekday or Weekend. </h7> <br>
+        <h7 class="text-white"> -Data Training:  The whole dataset was used to give you an answer and there was no split between training and testing data as such.  </h7> <br>
+
+    
     </div>
+
+    
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

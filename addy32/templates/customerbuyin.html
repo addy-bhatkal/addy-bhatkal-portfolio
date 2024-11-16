@@ -205,6 +205,12 @@
             font-family: sans-serif;
         }
 
+        h4 {
+            color: #ffffff;
+            font-size: 20px;
+            font-family: sans-serif;
+        }
+
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -218,7 +224,8 @@
 <body>
 
     <div class="container">
-        <h1 class="text-center mt-5">Customer Buy-In Prediction (Algo: Support Vector Machines)</h1>
+        <h1 class="mt-5 ml-2">Customer Buy-In Prediction (Algo: Support Vector Machines)</h1>
+        <h4 class="mt-2 ml-2"> Feel free to enter dummy values/educated guesses to test this model out. </h4> <br> <br>
 
         <!-- Display result message -->
         {% if result %}
@@ -312,6 +319,9 @@
                 <div class="row submit-button">
                     <div class="col-md-12 d-flex justify-content-between align-items-center">
                         <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                        <a href="https://github.com/addy-bhatkal/addybhatkal.com-All-The-Algos.git" 
+                    class="btn btn-primary" 
+                    target="_blank">Github Link to Source Code</a>
                         <div></div>
                         <button type="submit" class="btn btn-primary"><span>Check Bank Churn</span></button>
                     </div>
@@ -323,30 +333,54 @@
                 <button type="submit" class="btn btn-primary"> <span>Check Churn</span></button>
             </div> -->
 
-                    <div class="explanatory-text">
-                        <style>
-                            .explanatory-text {
-                                color: white;
-                                margin-top: 40px;
-                            }
-                        
-                            .explanatory-text h5 {
-                                font-size: 18px;
-                                font-weight: bold;
-                            }
-                        
-                            .explanatory-text p {
-                                font-size: 16px;
-                                margin-bottom: 0.5rem; /* Reduce the space between paragraphs */
-                            }
-                        </style>
-                        
-                        <h5>I created this model with a 'Support Vector Machine Classifier' algo on a dataset of 2.3k customer purchases in a superstore  </h5> <br>
-                        <h7>- I tested this using models like Support Vector machines (accuracy: 83.25%) Gradient Boost Classifier (accuracy: 82.07%), Decision Tree Classifier (accuracy: 80.81%), Logistic Regression Classifier (accuracy: 81.38%)</h7> <br>
-                        <h7>- I choose this model because of its high accuracy score compared to other models above and for a consistent accuracy score across multiple combinations/splits of data. (Cross validation)</h7> <br> <br>
-                        <h5>I used Recursive Feature Elimination (RFE) to identify the most important features/predictors .</h5>
-                        <h7>- This happens by testing the model by recursively elimintaing one predictor after another to get the best predictors</h7> <br>
-                        <h7>- While in a model like SVC it is sometimes difficult to predict which predictors had more influence than the others the above combination of 11 predictors gave the highest accuracy score  </h7>
+<div class="explanatory-text">
+    <style>
+        .explanatory-text {
+            color: white;
+            margin-top: 40px;
+        }
+    
+        .explanatory-text h5 {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    
+        .explanatory-text p {
+            font-size: 16px;
+            margin-bottom: 0.5rem; /* Reduce the space between paragraphs */
+        }
+    </style>
+    
+    <h5 class="text-white">About this algo:  </h5> 
+    <h7>- I built this model with a 'Support Vector Machine Classifier' algo on a dataset of 2.3k customer superstore purchases  with an accuracy of 86.83% </h7> <br>
+    <h7>- I also tested this using models like Logistic Regression Classifier (accuracy: 88.16%), 
+        Decision Tree Classifier (accuracy: 86.38%), Random Forest (accuracy score: 88.8%), 
+        K Nearest Neighbour (accuracy score: 83.92%), Support Vector machines (accuracy: 86.83%), 
+        Gradient Boost Classifier (accuracy: 87.94%) </h7> <br>
+    <h7>- Recursive Feature Elimination (RFE): In order to improve the accuracy of the model I used Recursive Feature Elimination (RFE) to identify the most important features/predictors. This happens by testing the model by recursively elimintaing one predictor after another to get the best predictors</h7> <br> 
+    <h7>- While in a model like SVC it is sometimes difficult to predict which predictors had more influence than the others the above combination of 11 predictors gave the highest accuracy score  </h7> <br> <br>
+    
+    <h5 class="text-white">Use cases of the underlying principle:  </h5>
+    <h7>- The Random Forest Classifier just like other classification algorithms (Logistic Regression, Decision Trees, XGBoost, Support Vector Machines, KMeans Cluster) could be used to: </h7> <br>
+    <h7>- Drug Effectiveness: Analyze which treatments work best for specific groups (pharma companies would be heavily reliant on this!), 
+        Credit Card Usage: Analyze spending patterns and use this data to crack partnership deals eg: AMEX and AirMiles, 
+        Predictive Maintenance: Forecast machinery failure before breakdowns occur (something that Honda mastered), 
+        Predict claims likelihood and calculate premiums accordingly Crop Yield Prediction: Analyze environmental 
+        factors and forecast yields - Even impact investing firms and farmer lending companies can benefit from this, 
+        Predict player/viewer churn and optimize in-game offers (e-gaming AND IPL/EPL/NFL/NBA), Gaming: Predict whether a player 
+        will continue playing or churn., Predict likelihood of in-app purchases and optimize offers, Predict top-performing 
+        players in competitive games, Energy Management: Solar Energy Prediction - Estimate energy output from solar farms 
+        based on weather conditions, Game Strategy Recommendations: Analyze past matches to suggest optimal strategies, 
+        Education: Dropout Prediction: Identify students at risk of dropping out based on academic performance and 
+        socio-demographic factors.  </h7> <br>
+
+    
+    <h7 class="text-white"> <br>
+    <h5 class="text-white">Dataset: What does the underlying data look like?:  </h5>
+    <h7 class="text-white"> - The dataset was an excel sheet of values of the same parameters you see above in the from. </h7> <br>
+    <h7 class="text-white"> - Data Training: 80% of that data was used to train the model and 20% was used to test it which gave you the accuracy score you see above.  </h7> <br>
+    model and 20% was used to test it which gave you the accuracy score you see above.  </h7> <br>
+
         
                 </div>
         </form>

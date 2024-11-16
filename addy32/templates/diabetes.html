@@ -26,8 +26,12 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100vh;
+            height: 120vh;
         }
+
+        .container, .form-wrapper {
+    margin-bottom: 180px; /* Adjust this value to increase the gap */
+}
 
         label {
             font-weight: bold;
@@ -40,14 +44,23 @@
             background-color: #f1f1f1;
             background-image: url("{% static 'images/diabetes_page.png' %}");
             background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-position: top center;
+            background-repeat: repeat;
+            padding-top: 150px; /* Added padding at the top */
             padding-bottom: 30px;
+            min-height: 100vh; /* Ensure minimum height covers the full viewport */
+            background-attachment: fixed;
         }
 
         h1 {
             color: #ffffff;
             font-size: 40px;
+            font-family: sans-serif;
+        }
+
+        h4 {
+            color: #ffffff;
+            font-size: 20px;
             font-family: sans-serif;
         }
 
@@ -61,7 +74,7 @@
 
         .explanatory-text {
             color: white;
-            margin-top: 40px;
+            margin-top: 90px;
         }
 
         .explanatory-text p {
@@ -76,6 +89,7 @@
         .explanatory-text h5 {
             font-size: 18px;
             font-weight: bold;
+            
         }
     </style>
 </head>
@@ -84,6 +98,7 @@
 
     <div class="container center">
         <h1 class="mt-5 ml-2">Diabetes Prediction (Algo: Random Forest Classifier)</h1>
+        <h4 class="mt-2 ml-2"> Feel free to enter dummy values/educated guesses to test this model out. </h4> <br> <br>
 
         <!-- Display result message -->
         {% if result %}
@@ -161,6 +176,9 @@
             <div class="row submit-button">
                 <div class="col-md-12 d-flex justify-content-between align-items-center">
                     <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                    <a href="https://github.com/addy-bhatkal/addybhatkal.com-All-The-Algos.git" 
+                    class="btn btn-primary" 
+                    target="_blank">Github Link to Source Code</a>
                     <button type="submit" class="btn btn-primary"><span>Check Diabetes</span></button>
                 </div>
             </div>
@@ -183,12 +201,31 @@
                     }
                 </style>
                 
-                <h5>Header: This classification problem has been created using the Random Forest Classifier algorithm/model (accuracy: 85.07%)</h5> 
-                <h7>- Algos used: Decision Tree Classifier (accuracy: 85.07%), Logistic Regression (accuracy: 85.07%), Support Vector Machines (accuracy:86.66%)</h7> <br>
-                <h7>- I choose this model because of its high accuracy score across multiple combinations/splits of data. (Cross validation)</h7> <br> <br>
-                <h5> Predictor (Feature) Selection: </h5>
-                <h7>- Predictors like Glucose (0.258026 out of 1), BMI (0.159644) and DiabetesPedigreeFunction (0.127092) have the highest influence on the final outcome. </h7> 
-                <h7>- I calculated this using a metric called the gini index which tells you which predictor has the higfhest influence on the final outcome. in technical terms this is done by calculating the sum of reduction in impurity of each predictor. </h7>
+                <h5 class="text-white">About this algo:  </h5> 
+        <h7 class="text-white"> - I created this model using a Random Forest Classifier on a dataset of 2,500 patient observations to predict diabetes outcomes. Accuracy score: 84.41% <br>
+            <h7>- I also tested this using models like Logistic Regression Classifier (accuracy: 81.81%), 
+                Decision Tree Classifier (accuracy: 75.97%), K Nearest Neighbour (accuracy score: 77.92%), 
+                Support Vector machines (accuracy: 75.32%), Gradient Boost Classifier (accuracy: 74.67%) </h7> <br> <br>
+        <h7> - The Random Forest algorithm creates multiple decision trees from subsets of the data, where each tree makes its own prediction. The final prediction is made based on the majority vote of these trees. </h7> <br> 
+        <h7 class="text-white">- FYI: A Decision Tree algorithm works by splitting the dataset into branches based on feature values, such as age, glucose levels, and BMI. Each branch represents a decision, and the tree continues splitting until it reaches a prediction.  </h7> <br> <br> 
+       
+        <h5 class="text-white">Use cases of the underlying principle:  </h5>
+        <h7>- The Random Forest Classifier just like other classification algorithms (Logistic Regression, Decision Trees, XGBoost, Support Vector Machines, KMeans Cluster) could be used to: </h7> <br>
+        <h7>- Predict customer lifetime value (CLV), Predict player performance or game outcomes like in the movie Moneyball, 
+            Predict healthcare stats and analytics like on your Fitbit or Apple watch to recommend workouts and meal plans, 
+            Predict which ads users are likely to click in digital marketing, Medical Diagnosis: Predict diseases (e.g., 
+            heart-risk, cancer, the occurrence of the next pandemic? :o ), Predict student performance and suggest interventions 
+            (something e-learning companies like Coursera, Skillshare, Udemy are doing), Regression tasks like House Price 
+            Prediction: Predict real estate prices, Energy Demand Forecasting: Predict electricity usage (like what Ecobee does for home energy management), Suggest products/content by classifying user preferences, Classify land cover or predict 
+            air pollution levels etc.  </h7> <br>
+
+       
+        <h7 class="text-white"> <br>
+        <h5 class="text-white">Dataset: What does the underlying data look like?:  </h5>
+        <h7 class="text-white"> - The dataset was an excel sheet of values of the same parameters you see above in the from. </h7> <br>
+        <h7 class="text-white"> - Data Training: 80% of that data was used to train the model and 20% was used to test it which gave you the accuracy score you see above.  </h7> <br>
+        
+
 
             </div>
         </form>

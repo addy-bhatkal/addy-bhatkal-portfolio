@@ -30,7 +30,8 @@ urlpatterns = [
     path("customerbuyin/", views.cby, name = 'customerbuyin'),
     path('bankchurn/', views.bankchurn, name = 'bankchurn'),
     path('arm/', views.arm, name = 'arm'),
-    path('movierecommender/', views.movierecom, name = 'movierecommender')
+    path('movierecommender/', views.movierecom, name = 'movierecommender'),
+    path('movie_list/', views.movie_list, name = 'movie list')
 ] +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

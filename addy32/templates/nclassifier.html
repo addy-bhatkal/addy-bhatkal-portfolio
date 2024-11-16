@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentiment Analysis</title>
+    <title>News Article Classifier</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -32,15 +32,24 @@
             color: #ffffff;
         }
 
+        .result-section {
+    margin-top: 0px; /* Adjust this value to reduce the gap */
+}
+
         .content-wrapper {
             padding: 150px 0;
         }
+
+        .container, .form-wrapper {
+    margin-bottom: 30px; /* Adjust this value to increase the gap */
+}
 
         .container.center {
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 100;
+            
         }
 
         .form-wrapper {
@@ -102,8 +111,8 @@
         <div class="header-container row justify-content-center">
             <div class="col-md-12 text-center">
                 <h1 class="d-inline">News Article Classifier</h1>
-                <h3 class="d-inline"> - Document Classification + Naive Bayes Algo</h3> <br> <br>
-                <h4 class="d-inline"> This is a Sentiment Analysis-like algorithm that classifies sub-genres of news categories basis a news headline </h4> <br> <br>
+                <h3 class="d-inline"> (Algo: Document Classification + Naive Bayes) </h3> <br> <br>
+                <h4 class="d-inline"> In this Sentiment Analysis-like algorithm I classify sub-genres of news categories basis a news headline </h4> <br> <br>
                 <h5 class="d-inline"> (Only the following 4 categories will show up for now - Finance, GeoPolitics, Sci-Tech, Sports)</h5>
             </div>
         </div>
@@ -116,8 +125,7 @@
                     <div class="mb-3">
                         <input type="text" id="article" name="article" class="form-control" placeholder="Enter Any News Article 'Headline' That Comes To Mind Here" required value="{{ article|default:'' }}">
                     </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                    <div class="d-flex justify-content-end align-items-center">
                         <button type="submit" class="btn btn-primary"><span class="white-span">Classify the Article</span></button>
                     </div>
                 </form>
@@ -126,31 +134,55 @@
     </div>
 
     <!-- Result Section -->
-    {% if result %}
-    <div class="row mt-3">
-        <div class="col-md-6 mx-auto">
-            <div class="alert alert-info" role="alert">
-                <strong>Predicted Classification: </strong> {{ result }}
+        <!-- Result Section -->
+        {% if result %}
+        <div class="row mt-3"> <!-- Change mt-10 to mt-3 to reduce the gap -->
+            <div class="col-md-6 mx-auto">
+                <div class="alert alert-info" role="alert">
+                    <strong>Predicted Classification: </strong> {{ result }}
+                </div>
             </div>
         </div>
-    </div>
-    {% endif %}
+        {% endif %}
+
+        <div class="row mt-5"> <!-- Added justify-content-end to move the content to the right -->
+            <div class="col-md-2"></div>
+            <div class="col-md-10"> <!-- Reduced the width to avoid full width and create space on the left -->
+                <div class="mt-0 d-flex justify-content-between"> 
+                    <!-- Transparent box with a hyperlink -->
+                    <a href="{% url 'home' %}"  class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+                        Back To Home
+                    </a>
+                    <a href="https://github.com/addy-bhatkal/addybhatkal.com-All-The-Algos.git" class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-right: 230px;"
+                        target="_blank">Github link to the source code</a> 
+                    </a>
+                </div>
+                <br> <br>    
+
 
  <!-- Explanatory Section -->
-<div class="row mt-5 justify-content-end"> <!-- Added justify-content-end to move the content to the right -->
-    <div class="col-md-10 ml-auto"> <!-- Reduced the width to avoid full width and create space on the left -->
-        <h5 class="text-white">About: This algo uses a Count Vectorizer to convert words in articles into a matrix of word frequencies. </h5>
-        <h5 class="text-white">It then uses a Naive Bayes algorithm to assign a Probability score of your entered text v/s each category. </h5>
-        <h5 class="text-white">The category with the higest assigned probability wins! (And that's the result you see). </h5> <br> 
-        <h5 class="text-white">Use cases:  </h5>
+<div class="row mt-10 justify-content-end"> <!-- Added justify-content-end to move the content to the right -->
+    <div class="col-md-12 ml-auto"> <!-- Reduced the width to avoid full width and create space on the left -->
+        <h5 class="text-white">About this algo: </h5>
+        <h7>- I created this algo using a Count Vectorizer to convert words in articles into a numeric matrix of word frequencies. </h7> <br>
+        <h7 class="text-white">- I then used a Naive Bayes algorithm to assign a Probability score of your entered text v/s each category. </h7> <br>
+        <h7 class="text-white">- The category with the higest assigned probability wins! (And that's the result you see). </h7> <br> <br> 
+        
+        <h5 class="text-white">Use cases of the underlying principle:  </h5>
         <h7>- Twitter (X) tweets sentiment analysis: Positive, Negative, Neutral! </h7> <br>
-        <h7>- Election Recommender: Voter sentiment towards a party basis sentiment analysis of multiple news articles in a region</h7> <br>
-        <h7>- HR Candidate Recommender system: Company Job Descriptions v/s Candidate resumes - Good fit v/s Not a good fit </h7> <br>
+        <h7>- Election Recommender: Voter sentiment towards a party basis sentiment analysis of multiple news articles in a region. </h7> <br>
+        <h7>- HR Candidate Recommender system: Company Job Descriptions v/s Candidate resumes - Good fit v/s Not a good fit. </h7> <br>
         <h7>- Intent Classification: In chatbot systems, classifying user queries into specific intents (e.g., "book a flight", "check weather"). </h7> <br>
         <h7>- Document Categorization: Classifying legal or financial documents into categories like contracts, invoices, reports, etc. </h7> <br>
         <h7>- Product Categorization: Categorizing product descriptions in e-commerce platforms (e.g., "electronics", "clothing", "home goods"). </h7> <br>
         <h7>- Author Identification: Determining the author of a document based on writing style or specific word choices.
         </h7> <br>
+        <h7 class="text-white"> <br>
+            <h5 class="text-white">Dataset: What does the underlying data look like?:  </h5>
+            <h7 class="text-white"> -This dataset contains article titles, article mini-descriptions and labels, classifying it into categories. This is then primarily used as training data.  </h7> <br>
+            <h7 class="text-white"> - Data Training: 80% of that data was used to train the model and 20% was used to test it which gave you the accuracy score you see above.  </h7> <br>
+            
+    
 
 </div>
 

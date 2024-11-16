@@ -72,8 +72,8 @@
         <!-- Title -->
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
-                <h1 style="color: #ffffff;">Walmart 'Frequently Bought Items' Recommender</h1> <br>
-                <h5 style="color: #ffffff;"> Choose any grocery item from the dropdown list below to get other frequently purchased items </h5> 
+                <h1 style="color: #ffffff;">Walmart 'Frequently Bought Items' Recommender (Algo: Association Rule Mining)</h1> <br>
+                <h5 style="color: #ffffff;"> In this relationship identifying algorithm I help you find other frequently purchased products basis a dropdown list of superstore items </h5> 
                 <div class="list-box">
                     <h6 style="color: #ffffff;">
                         Note: This is an inexhaustive list ie A LOT more items can be added to this basis additional consumer data.
@@ -90,41 +90,41 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="product" class="form-label">Product</label>
-                    <div class="input-group">
-                        <select id="product" name="product" class="form-select" required>
-                            <option value="" disabled selected>Select a product</option>
-                            <option value="Coke">Coke</option>
-                            <option value="Sandwich">Sandwich</option>
-                            <option value="Juice">Juice</option>
-                            <option value="Cookies">Cookies</option>
-                            <option value="Cake">Cake</option>
-                            <option value="Coffee, Hot Chocolate">Coffee, Hot Chocolate</option>
-                            <option value="Soup">Soup</option>
-                            <option value="Coffee, Cake">Coffee, Cake</option>
-                            <option value="Hot Chocolate">Hot Chocolate</option>
-                            <option value="Coffee, Tea">Coffee, Tea</option>
-                            <option value="Tea">Tea</option>
-                            <option value="Pastry">Pastry</option>
-                            <option value="Medialuna">Medialuna</option>
-                            <option value="Scone">Scone</option>
-                            <option value="Coffee">Coffee</option>
-                            <option value="Keeping It Local">Keeping It Local</option>
-                            <option value="Toast">Toast</option>
-                            <option value="Coffee, Bread">Coffee, Bread</option>
-                            <option value="Salad">Salad</option>
-                            <option value="Alfajores">Alfajores</option>
-                            <option value="Hot Chocolate, Cake">Hot Chocolate, Cake</option>
-                            <option value="Spanish Brunch">Spanish Brunch</option>
-                            <option value="Muffin">Muffin</option>
-                            <option value="Brownie">Brownie</option>
-                            <option value="Tiffin">Tiffin</option>
-                            <option value="Hearty & Seasonal">Hearty & Seasonal</option>
-                            <option value="Jammie Dodgers">Jammie Dodgers</option>
-                            <option value="Bread">Bread</option>
-                            <option value="Jam">Jam</option>
-                        </select>
-                    </div>
+                    <!-- Dropdown for selecting product -->
+                    <select id="product" name="product" class="form-control" required>
+                        <option value="" disabled selected>Select a product</option>
+                        <option value="Coca-Cola">Coca-Cola</option>
+                        <option value="Subway Sub of the Day Sandwich">Subway Sub of the Day Sandwich</option>
+                        <option value="Tropicana Orange Juice">Tropicana Orange Juice</option>
+                        <option value="Chip's Ahoy Chocolate Chip Cookies">Chip's Ahoy Chocolate Chip Cookies</option>
+                        <option value="Hot chocolate, Starbucks Dark Roast Coffee Beans">Hot chocolate, Starbucks Dark Roast Coffee Beans</option>
+                        <option value="Betty Crocker Cake Mix">Betty Crocker Cake Mix</option>
+                        <option value="Campbell's Soup">Campbell's Soup</option>
+                        <option value="Betty Crocker Cake Mix, Starbucks Dark Roast Coffee Beans">Betty Crocker Cake Mix, Starbucks Dark Roast Coffee Beans</option>
+                        <option value="Hot chocolate">Hot chocolate</option>
+                        <option value="Lipton Ice Tea, Starbucks Dark Roast Coffee Beans">Lipton Ice Tea, Starbucks Dark Roast Coffee Beans</option>
+                        <option value="Lipton Ice Tea">Lipton Ice Tea</option>
+                        <option value="Baker's Treat Danish Pastry">Baker's Treat Danish Pastry</option>
+                        <option value="Medialunas Argentinian Croissant">Medialunas Argentinian Croissant</option>
+                        <option value="Twinings Scone">Twinings Scone</option>
+                        <option value="Keeping It Local Brand">Keeping It Local Brand</option>
+                        <option value="Starbucks Dark Roast Coffee Beans">Starbucks Dark Roast Coffee Beans</option>
+                        <option value="Oroweat Toast">Oroweat Toast</option>
+                        <option value="Wonder Bread, Starbucks Dark Roast Coffee Beans">Wonder Bread, Starbucks Dark Roast Coffee Beans</option>
+                        <option value="Simply Fresh Organic Salad">Simply Fresh Organic Salad</option>
+                        <option value="La Patisserie Alfajores">La Patisserie Alfajores</option>
+                        <option value="Betty Crocker Cake Mix, Hot chocolate">Betty Crocker Cake Mix, Hot chocolate</option>
+                        <option value="Spanish Brunch Café">Spanish Brunch Café</option>
+                        <option value="Hostess Muffin">Hostess Muffin</option>
+                        <option value="Ghirardelli Brownie">Ghirardelli Brownie</option>
+                        <option value="Tiffin Box">Tiffin Box</option>
+                        <option value="Hearty & Seasonal Foods">Hearty & Seasonal Foods</option>
+                        <option value="Jammie Dodgers Biscuits">Jammie Dodgers Biscuits</option>
+                        <option value="Wonder Bread">Wonder Bread</option>
+                        <option value="Smucker's Jam">Smucker's Jam</option>
+                    </select>
                 </div>
+                <!-- Submit button -->
                 <button type="submit" class="btn btn-primary">Get Recommendations</button>
             </form>
         </div>
@@ -154,17 +154,17 @@
                 <a href="{% url 'home' %}"  class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none;">
                     Back To Home
                 </a>
-                <a href="{% url 'home' %}" class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-right: 230px;"">
-                    Github link to the source code
+                <a href="https://github.com/addy-bhatkal/addybhatkal.com-All-The-Algos.git" class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-right: 230px;"
+                    target="_blank">Github link to the source code</a> 
                 </a>
             </div>
             <br> <br>            
         <h5 class="text-white"> About this algo: </h5> 
-        <h6 class="text-white">- This is a data mining algorithm (Association Rule Mining) that discovers associations or relationships/patterns within large datasets. </h6>
+        <h6 class="text-white">- I created this algo using a data mining algorithm (Association Rule Mining) that discovers associations or relationships/patterns within large datasets. </h6>
         <h6 class="text-white">- The underlying structure of this model aims to give the result:  "If A then B".  </h6>
         <h6 class="text-white">- The metric I used to calculate this is 'lift' which is ratio of "how often is B purchased when A is definitely purchased" to "how often are they indpepndently purchased"  </h6> 
         <h6 class="text-white">- This results in associations between common items </h6> <br> 
-        <h5 class="text-white">Use cases:  </h5>
+        <h5 class="text-white">Use cases of the underlying principle:  </h5>
         <h7 class="text-white">- Healthcare: If disease/symptom 'A' occurs then here is the list of disease/symptoms 'B' that could also occur! </h7> <br>
         <h7 class="text-white">- Media and Streaming: The infamous 'You may also like' section on Netflix is a perfect use case here </h7> <br> 
         <h7 class="text-white">- Market Basket Analysis: Discover patterns in customer purchases (e.g., customers who buy bread often buy butter). </h7> <br>
@@ -175,9 +175,10 @@
         <h7 class="text-white">- Insurance: Identify commonly claimed risks or frequently bundled insurance packages. </h7> <br> 
         <h7 class="text-white">- Inventory Management: Predict product demands by identifying associations between items frequently bought together.  </h7> <br> 
         <h7 class="text-white"> <br>
-        <h5 class="text-white">What does the underlying Dataset look like?:  </h5>
+        <h5 class="text-white">Dataset: What does the underlying data look like?:  </h5>
         <h7 class="text-white"> -This is a base level dataset of customer transactions and all the items purchased by them </h7> <br>
         <h7 class="text-white"> - It entails a column of the transaction id, the items bought on that id, date and time of the day and weekday or weekend.  </h7> <br>
+        <h7 class="text-white"> - Data Training: The whole dataset was used to give you an answer and there was no split between training and testing data as such.  </h7> <br>
     
 
 </div>

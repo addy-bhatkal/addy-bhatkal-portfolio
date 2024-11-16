@@ -14,13 +14,15 @@ from mlxtend.frequent_patterns import apriori
 
 def home(request):
     routes = [
+        {'endpoint': 'Movie Recommender', 'url': "movierecommender/", 'image':'images/movierecommender.png'},
+        {'endpoint': 'Frequently Bought Items', 'url': "arm/", 'image':'images/arm.png'},
         {'endpoint': 'Diabetes Predictor (Decision Tree Classifier)', 'url': 'diabetes/','image':'images/diabetes2.png'},
         {'endpoint': 'News Category Classifier (Count Vectorizer + Naive Bayes)', 'url': 'nclassifier/', 'image':'images/news3.png'},
         {'endpoint': 'Song Recommender (Term Frequency-Inverse Document Frequency + Cosine Similarity)', 'url': 'recommend_songs/', 'image':'images/song2.png'},
         {'endpoint': 'Customer Marketing Campaign Buy-in (Light Gradient Boost)', 'url': 'customerbuyin/', 'image':'images/cby2.png'},
         {'endpoint': 'Bank Credit Card Customer Churn (Logistic Regression)', 'url': "bankchurn/", 'image':'images/bank.png'},
-        {'endpoint': 'Frequently Bought Items', 'url': "arm/", 'image':'images/arm.png'},
-        {'endpoint': 'Movie Recommender', 'url': "movierecommender/", 'image':'images/movierecommender.png'}
+        {'endpoint': 'Housing Price Predictor: Ridge Regression COMING SOON', 'url': "arm/", 'image':'images/Algo9_wait.png'}
+        
         
 
         
@@ -237,11 +239,7 @@ def bankchurn(request):
 
     return render(request, 'bankchurn.html', context)
 
-df2 = pd.read_csv('ARM - Bakery.csv')
-df2['Items'] = df2['Items'].replace({
-    'Hot chocolate': 'Hot Chocolate'
-    
-})
+df2 = pd.read_csv('ARM - Bakery_mapped2.csv')
 
 
 def arm_ML(prod):
@@ -277,23 +275,53 @@ def arm(request):
 
 
 
-movie = pd.read_csv('moviesrecom.csv')
+movie_df = pd.read_csv('moviesrecom.csv')
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 def movierecom_ML(moviename):
-    movie_res = movie.corrwith(movie[moviename]).sort_values(ascending=False)
-    movie_res2 = pd.DataFrame(movie_res, columns=['corr'])
-    movie_listy = []
-    return list(movie_res2[movie_res2['corr']<1.01])
+    #if moviename not in movie_df.columns:     # Check if the movie exists in the DataFrame
+        #return pd.DataFrame()  # Return an empty DataFrame if the movie does not exist
+    movie_res = movie_df.corrwith(movie_df[moviename]).sort_values(ascending=False)
+    movie_res2 = pd.DataFrame(movie_res, columns=['corr']).reset_index().rename(columns={'index': 'movies'})
+    #movie_res2 = movie_res2.reset_index().rename(columns={'index': 'movies'})
+    return movie_res2[['movies', 'corr']].head(50)
+
+from django.core.paginator import Paginator
 
 def movierecom(request): 
     movie = None
     similar_movie = None
 
-    if request.method == "POST":
-        movie = request.POST.get('movie', '')
-        if movie:  # Ensure movie is not empty
-            similar_movie = movierecom_ML(movie)
-            print(similar_movie)
+    try: 
+        if request.method == "POST":
+            movie = request.POST.get('movie', '')
+            movie = movie.strip()
+            if movie:
+                similar_movie_df = movierecom_ML(movie) 
+                similar_movie = similar_movie_df[['movies']].values.tolist() # Convert DataFrame to a list of tuples (movie name, correlation)
+            else:
+                similar_movie = []
+
+    except ValueError:
+            similar_movie = []
 
     return render(request, 'movierecommender.html', {'movie': movie, 'similar_movie': similar_movie if similar_movie is not None else []})
+
+
+def movie_list(request):
+    movies = movie_df.columns.tolist()  # Assuming the column name is 'name'
+    paginator = Paginator(movies, 50)  # Show 50 movies per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    # Calculate the page range (1-10 initially)
+    current_page = page_obj.number
+    page_range_start = max(1, ((current_page - 1) // 10) * 10 + 1)
+    page_range_end = min(page_range_start + 9, paginator.num_pages)
+    page_range = range(page_range_start, page_range_end + 1)
+
+    return render(request, 'movie_list.html', {
+        'page_obj': page_obj,
+        'page_range': page_range,
+        'r' : range(1,11)
+    })

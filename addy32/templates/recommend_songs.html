@@ -25,7 +25,7 @@
 
         body {
             background-color: #f7f7f7;
-            background-image: url("{% static 'images/song111.png' %}");
+            background-image: url("{% static 'images/song_bg.png' %}");
             font-family: 'Arial', sans-serif;
             color: #ffffff;
         }
@@ -44,7 +44,7 @@
             flex-direction: column;
             justify-content: flex-start;
             height: 100vh;
-            padding-top: 20px;
+            padding-top: 0px;
         }
 
         .form-wrapper {
@@ -59,7 +59,7 @@
         }
 
         .header-container {
-            margin-top: 150px;
+            margin-top: 100px;
             margin-bottom: 10px;
         }
 
@@ -87,8 +87,8 @@
         <div class="header-container row justify-content-center">
             <div class="col-md-12 text-center">
                 <h2 class="d-inline">Song Recommender</h2>
-                <h4 class="d-inline"> - Term Frequency/Inverse Document Frequency + Cosine Similarity correlation score</h4> <br><br>
-                <h5 class="d-inline"> This algorithm (a personal favourite) is based on a limited database of 57,000 songs + their lyrics + their genres.  </h5> <br><br>
+                <h4 class="d-inline"> (Algo: Term TF/IDF + Cosine Similarity) </h4> <br><br>
+                <h5 class="d-inline"> This algorithm is a personal favourite wherein I recommend songs on the basis of their genres + lyrics + artists  </h5> <br><br>
                 <h4 class="d-inline"> NOTE: This takes a few seconds to load!  </h4> <br><br>
             </div>
         </div>
@@ -103,8 +103,7 @@
                     </div>
 
                     <div class="row submit-button">
-                        <div class="col-md-12 d-flex justify-content-between align-items-center">
-                            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                        <div class="col-md-12 d-flex justify-content-end align-items-center">
                             <div></div>
                             <button type="submit" class="btn btn-primary">
                                 <span class="white-span">Get Recommendations</span>
@@ -134,22 +133,37 @@
                 </div>
             </div>
             {% endif %}
+            <div class="row mt-5"> <!-- Added justify-content-end to move the content to the right -->
+                <div class="col-md-2"></div>
+                <div class="col-md-10"> <!-- Reduced the width to avoid full width and create space on the left -->
+                    <div class="mt-0 d-flex justify-content-between"> 
+                        <!-- Transparent box with a hyperlink -->
+                        <a href="{% url 'home' %}"  class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+                            Back To Home
+                        </a>
+                        <a href="https://github.com/addy-bhatkal/addybhatkal.com-All-The-Algos.git" class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-right: 230px;"
+                            target="_blank">Github link to the source code</a> 
+                        </a>
+                    </div>
+                    <br> <br>  
 
          <!-- Explanatory Section -->
 <div class="row mt-5 justify-content-end"> <!-- Added justify-content-end to move the content to the right -->
-    <div class="col-md-10 ml-auto"> <!-- Reduced the width to avoid full width and create space on the left -->
-        <h5 class="text-white">About: This algo uses a Count Vectorizer to convert words in articles into a matrix of word frequencies. </h5>
-        <h5 class="text-white">It then uses a Naive Bayes algorithm to assign a Probability score of your entered text v/s each category. </h5>
-        <h5 class="text-white">The category with the higest assigned probability wins! (And that's the result you see). </h5> <br> 
-        <h5 class="text-white">Use cases:  </h5>
-        <h7>- Twitter (X) tweets sentiment analysis: Positive, Negative, Neutral! </h7> <br>
-        <h7>- Election Recommender: Voter sentiment towards a party basis sentiment analysis of multiple news articles in a region</h7> <br>
-        <h7>- HR Candidate Recommender system: Company Job Descriptions v/s Candidate resumes - Good fit v/s Not a good fit </h7> <br>
-        <h7>- Intent Classification: In chatbot systems, classifying user queries into specific intents (e.g., "book a flight", "check weather"). </h7> <br>
-        <h7>- Document Categorization: Classifying legal or financial documents into categories like contracts, invoices, reports, etc. </h7> <br>
-        <h7>- Product Categorization: Categorizing product descriptions in e-commerce platforms (e.g., "electronics", "clothing", "home goods"). </h7> <br>
-        <h7>- Author Identification: Determining the author of a document based on writing style or specific word choices.
-        </h7> <br>
+    <div class="col-md-12 ml-auto"> <!-- Reduced the width to avoid full width and create space on the left -->
+        <h5 class="text-white">About this algo:  </h5> 
+        <h7 class="text-white"> I created this algo using an NLP tokenizer and a Term Frequency/Inverse Document Frequency model to convert song lyrics into a matrix of word frequencies. I then use a cosine similarity score to calculate similarities between a song and other such songs. </h7>
+        <h7 class="text-white">The songs with the higest cosine similarity wins! (And that's the result you see). </h7> <br> <br> 
+        <h5 class="text-white">Use cases of the underlying principle:  </h5>
+        <h7>- Grant matching: Government agencies and NGOs can use this principle to idnetify their agency offering v/s grants that startups can apply to.</h7> <br>
+        <h7>- HR Recommender System: Matching the best candidates to an ideal job profile using descriptions of the two </h7> <br>
+        <h7>- Create your own Search Engine: This is also used in matchin search queries to results </h7> <br>
+
+       
+        <h7 class="text-white"> <br>
+            <h5 class="text-white">Dataset: What does the underlying data look like?:  </h5>
+            <h7 class="text-white"> - The dataset consisted of 57,000 songs, its lyrics, its artists and its genres. </h7> <br>
+            <h7 class="text-white"> - The underlying text within it was used to check word/text frequency across other songs/lyrics. This was converted into a matrix, and a similairty correlation score was attached to it to give you the final result.  </h7> <br>
+            <h7 class="text-white"> - Data Training: The whole dataset was used to give you an answer and there was no split between training and testing data as such.  </h7> <br>
 
 </div>
 
