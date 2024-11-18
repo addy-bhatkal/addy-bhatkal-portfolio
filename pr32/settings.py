@@ -25,13 +25,13 @@ SECRET_KEY = 'django-insecure-i)uop+@mt)&0_#^vk$#s#b4-pkhol1u+9)br(hq0y99$1ty29v
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "addy32/static",
 ]
 
 CSRF_TRUSTED_ORIGINS = ['https://addybhatkal.com']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =True
 
 ALLOWED_HOSTS = ['209.74.64.50', 'addybhatkal.com', '127.0.0.1']
 

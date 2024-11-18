@@ -20,6 +20,9 @@ from django.urls import path
 from addy32 import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
+
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -31,7 +34,10 @@ urlpatterns = [
     path('bankchurn/', views.bankchurn, name = 'bankchurn'),
     path('arm/', views.arm, name = 'arm'),
     path('movierecommender/', views.movierecom, name = 'movierecommender'),
-    path('movie_list/', views.movie_list, name = 'movie list')
+    path('DataViz/', views.tableau_redirect, name = 'tableau'),
+    path('coming-soon/', views.comingsoon1, name = 'comingsoon_housingprices')
+
+
 ] +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

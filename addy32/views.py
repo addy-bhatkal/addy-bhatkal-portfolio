@@ -10,6 +10,10 @@ from sklearn.decomposition import TruncatedSVD
 from mlxtend.frequent_patterns import association_rules
 from mlxtend.frequent_patterns import apriori
 
+from django.shortcuts import redirect
+
+def tableau_redirect(request):
+    return redirect("https://public.tableau.com/app/profile/addy.bhatkal/favorites")
 
 
 def home(request):
@@ -21,13 +25,16 @@ def home(request):
         {'endpoint': 'Song Recommender (Term Frequency-Inverse Document Frequency + Cosine Similarity)', 'url': 'recommend_songs/', 'image':'images/song2.png'},
         {'endpoint': 'Customer Marketing Campaign Buy-in (Light Gradient Boost)', 'url': 'customerbuyin/', 'image':'images/cby2.png'},
         {'endpoint': 'Bank Credit Card Customer Churn (Logistic Regression)', 'url': "bankchurn/", 'image':'images/bank.png'},
-        {'endpoint': 'Housing Price Predictor: Ridge Regression COMING SOON', 'url': "arm/", 'image':'images/Algo9_wait.png'}
-        
-        
-
+        {'endpoint': 'Data Visualizations: Tableau', 'url': "DataViz/", 'image': 'images/dataviz.png'}, 
+        {'endpoint': 'HousingPrices', 'url': "coming-soon/", 'image': 'images/uc.png'}
         
     ]
     return render(request, 'home.html', {'routes': routes})
+
+
+
+def comingsoon1(request):
+    return render(request, 'comingsoon1.html')
 
 with open('diabetes_predictor.sav', 'rb') as f2:
     load_model = pickle.load(f2)
