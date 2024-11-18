@@ -103,13 +103,18 @@
                     </div>
 
                     <div class="row submit-button">
-                        <div class="col-md-12 d-flex justify-content-end align-items-center">
-                            <div></div>
+                        <div class="col-md-12 d-flex justify-content-between align-items-center">
+                            <!-- Backlink for "Movie List" button -->
+                            <a href="/song_list" class="btn btn-primary">
+                                Song List
+                            </a>
+                            <!-- Submit button for recommendations -->
                             <button type="submit" class="btn btn-primary">
-                                <span class="white-span">Get Recommendations</span>
+                                Get Recommendations
                             </button>
                         </div>
                     </div>
+              
                 </form>
             </div>
 
@@ -146,6 +151,49 @@
                         </a>
                     </div>
                     <br> <br>  
+
+
+                    {% if page_obj %}
+                    <div class="row">
+                        <div class="col-md-6 mx-auto mt-3">
+                            <ul class="list-group">
+                                {% for movie in page_obj %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>{{ movie.0 }}</span> <!-- Movie name -->
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination Controls -->
+                    <div class="row mt-3">
+                        <div class="col-md-6 mx-auto text-center">
+                            <nav>
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                    </li>
+                                    {% endif %}
+                    
+                                    {% for num in page_obj.paginator.page_range %}
+                                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                    {% endfor %}
+                    
+                                    {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    {% endif %}
+            
 
          <!-- Explanatory Section -->
 <div class="row mt-5 justify-content-end"> <!-- Added justify-content-end to move the content to the right -->

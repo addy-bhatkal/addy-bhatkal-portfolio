@@ -35,7 +35,10 @@ urlpatterns = [
     path('arm/', views.arm, name = 'arm'),
     path('movierecommender/', views.movierecom, name = 'movierecommender'),
     path('DataViz/', views.tableau_redirect, name = 'tableau'),
-    path('coming-soon/', views.comingsoon1, name = 'comingsoon_housingprices')
+    path('coming-soon/', views.comingsoon1, name = 'comingsoon_housingprices'),
+    path('movie_list/', views.movie_list, name = 'movie_list'),
+    path('song_list/', views.song_list, name = 'song_list')
+
 
 
 ] +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

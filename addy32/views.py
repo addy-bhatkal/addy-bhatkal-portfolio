@@ -108,7 +108,7 @@ def nclassifier(request):
     return render(request, 'nclassifier.html', {'article': ''}) 
 
 
-df = pd.read_csv('spotify_millsongdata.csv')
+df = pd.read_csv('spotify_millsongdata2.csv')
 
 tf = TfidfVectorizer(ngram_range=(1,2), max_df=0.5, min_df=5, stop_words='english')
 vec = tf.fit_transform(df['text'])
@@ -133,9 +133,27 @@ def song_reco(request):
     if request.method == "POST":
         song = request.POST.get('song', '')
         similar_songs = reco(song)
-        
 
     return render(request, 'recommend_songs.html', {'similar_songs':similar_songs, 'song':song })
+
+
+def song_list(request):
+    songs_list = df['song_artist'].tolist()  # Assuming the column name is 'name'
+    paginator = Paginator(songs_list, 200) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    # Calculate the page range (divide into 10-page chunks)
+    current_page = page_obj.number
+    chunk_size = 10  # Set the chunk size (can be 10, 20, etc.)
+    chunk_start = ((current_page - 1) // chunk_size) * chunk_size + 1
+    chunk_end = min(chunk_start + chunk_size - 1, paginator.num_pages)
+    page_range = range(chunk_start, chunk_end + 1)
+
+    return render(request, 'song_list.html', {
+        'page_obj': page_obj,
+        'page_range': page_range,
+    })
 
 with open('customerbuyin.sav', 'rb') as f2:
     cby_loaded_model = pickle.load(f2)

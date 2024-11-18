@@ -75,7 +75,7 @@ h1 {
     font-size: 40px;
 }
 
-h2, h4, h5 {
+h2, h4, h5, h6 {
 color: #ffffff;  /* Set the text color to white */
 }
 
@@ -92,7 +92,8 @@ color: #ffffff;  /* Set the text color to white */
         <div class="header-container row justify-content-center">
             <div class="col-md-12 text-center">
                 <h2>Movie Recommender (Algo: User Based Filtering + Correlation Score) </h2>
-                <h4>In this 'user-based content filtering' you get recommendations for similar movies basis movie-ratings of similar users:</h4> <br>
+                <h4>In this 'user-based content filtering' algo you get recommendations for similar movies basis movie-ratings of similar users:</h4> 
+                <h6>(Choose from the movie list below)</h6>
                 
             </div>
         </div>
@@ -105,9 +106,14 @@ color: #ffffff;  /* Set the text color to white */
                         <input type="text" id="movie" name="movie" class="form-control" placeholder="Enter movie name"
                             required value="{{ movie|default:'' }}">
                     </div>
-
+        
                     <div class="row submit-button">
-                        <div class="col-md-12 d-flex justify-content-end align-items-center">
+                        <div class="col-md-12 d-flex justify-content-between align-items-center">
+                            <!-- Backlink for "Movie List" button -->
+                            <a href="/movie_list" class="btn btn-primary">
+                                Movie List
+                            </a>
+                            <!-- Submit button for recommendations -->
                             <button type="submit" class="btn btn-primary">
                                 Get Recommendations
                             </button>
@@ -115,11 +121,16 @@ color: #ffffff;  /* Set the text color to white */
                     </div>
                 </form>
             </div>
+        </div>
+        
 
             {% if similar_movie %}
             <div class="row">
+
                 <div class="col-md-6 mx-auto mt-3">
+                    <h3 style="color: white;">Your Recommendations</h3>
                     <ul class="list-group">
+
                         {% for movie in similar_movie %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span>{{ movie.0 }}</span> <!-- Movie name -->
@@ -130,6 +141,7 @@ color: #ffffff;  /* Set the text color to white */
                 </div>
             </div>
             {% endif %}
+        
 
 
         <div class="row mt-5"> <!-- Added justify-content-end to move the content to the right -->
