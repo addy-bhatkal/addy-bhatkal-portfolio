@@ -122,26 +122,36 @@ color: #ffffff;  /* Set the text color to white */
                 </form>
             </div>
         </div>
+        {%if error_message%}
+        <div class="alert alert-danger" >
+            {{ error_message }}
+        </div>
+        {% endif %}
+
+        {% if similar_movie %}
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-8"> <!-- Adjust width of the table -->
+                <h3 class="text-center" style="color: white;">Your Recommendations</h3>
         
-
-            {% if similar_movie %}
-            <div class="row">
-
-                <div class="col-md-6 mx-auto mt-3">
-                    <h3 style="color: white;">Your Recommendations</h3>
-                    <ul class="list-group">
-
-                        {% for movie in similar_movie %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>{{ movie.0 }}</span> <!-- Movie name -->
-                            
-                        </li>
-                        {% endfor %}
-                    </ul>
+                <!-- Header Row -->
+                <div class="d-flex justify-content-between mb-2" style="font-size: 1.5rem; color: white;">
+                    <div class="text-start font-weight-bold">Movie</div>
+                    <div class="text-end font-weight-bold">Correlation Score</div>
                 </div>
-            </div>
-            {% endif %}
         
+                <!-- Movie List -->
+                <ul class="list-group">
+                    {% for movie in similar_movie %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ movie.0 }}</span> <!-- Movie name -->
+                        <span class="text-muted">{{ movie.1 }}</span> <!-- Correlation -->
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+                
 
 
         <div class="row mt-5"> <!-- Added justify-content-end to move the content to the right -->
@@ -149,7 +159,7 @@ color: #ffffff;  /* Set the text color to white */
         <div class="col-md-10"> <!-- Reduced the width to avoid full width and create space on the left -->
             <div class="mt-0 d-flex justify-content-between"> 
                 <!-- Transparent box with a hyperlink -->
-                <a href="{% url 'home' %}"  class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+                <a href="{% url 'home' %}"  class="btn btn-outline-light style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none;">
                     Back To Home
                 </a>
                 <a href="https://github.com/addy-bhatkal/addybhatkal.com-All-The-Algos.git" class="btn btn-outline-light" style="background-color: rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-right: 230px;"
@@ -160,7 +170,7 @@ color: #ffffff;  /* Set the text color to white */
             <br> <br>  
         </div>
 
-
+        
         {% if page_obj %}
         <div class="row">
             <div class="col-md-6 mx-auto mt-3">
@@ -210,8 +220,8 @@ color: #ffffff;  /* Set the text color to white */
         <h5 class="text-white"> About this algo: </h5> 
         <h6 class="text-white">- I created this algo using a 'User Based Collaborative Filtering' mechanism on a dataset of 100,000 movie reviews. </h6>
         <h6 class="text-white">- This method relies on users reviews as against knowledge about the underlying content. I applied a basic correlation score on a manipulated table of user ratings. </h6>
-        <h6 class="text-white">- The underlying 'limitation' of the math model - The same user must have rated multiple movies for a corelation score to be caculated on that movie.  </h6>
-        <h6 class="text-white">- This results in associations between common movies based on corelation scores </h6> <br> 
+        <h6 class="text-white">- The underlying 'limitation' of the math model - The same user must have rated multiple movies for a correlation score to be calculated on that movie.  </h6>
+        <h6 class="text-white">- This results in associations between common movies based on correlation scores </h6> <br> 
         <h5 class="text-white"> Use cases of the underlying principle:  </h5>
         <h7 class="text-white">- Media: Recommending similar movies to users as done on Netflix/Amazon Prime/HBO/Apple TV </h7> <br>
         <h7 class="text-white">- Music Recommender: Spotify like algorithm to suggest similar songs based on users picks!</h7> <br>
@@ -219,7 +229,7 @@ color: #ffffff;  /* Set the text color to white */
         <h7 class="text-white">- Restaurant Recommendations: Apps like Yelp, Uber Eats, Liefrando, Zomato, Grubhub, Grab, Foodpanda heavily rely on users reviews to suggest restaurants to other users </h7> <br>
         <h7 class="text-white">- Travel Recommendations: Which could go hand in hand with the above especially when travellers leave reviews for non-touristy spots. Additionally, A text mining algo to classify the sentiment could be fit here. Note: I have coded a similar text mining algo right here: </h7> <br>
         <h7 class="text-white">- News and Article Recommendations: This can be used to identify a correlation score with the same user’s existing past reading history as against relying on other similar users.</h7> <br>
-        <h7 class="text-white">- Instagram Feed recommendations:  Similar principle to the news articles corelation</h7> <br>
+        <h7 class="text-white">- Instagram Feed recommendations:  Similar principle to the news articles correlation</h7> <br>
         <h7 class="text-white">- Job Matching in HR: Suggesting similar job applicants basis successfully filtered candidates</h7> <br>
         
         <h7 class="text-white"> <br>

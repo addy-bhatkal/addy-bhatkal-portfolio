@@ -112,7 +112,7 @@
             <div class="col-md-12 text-center">
                 <h1 class="d-inline">News Article Classifier</h1>
                 <h3 class="d-inline"> (Algo: Document Classification + Naive Bayes) </h3> <br> <br>
-                <h4 class="d-inline"> In this Sentiment Analysis-like algorithm I classify sub-genres of news categories basis a news headline </h4> <br> <br>
+                <h4 class="d-inline"> This Sentiment Analysis-like algorithm classifies sub-genres of news categories basis a news headline </h4> <br> <br>
                 <h5 class="d-inline"> (Only the following 4 categories will show up for now - Finance, GeoPolitics, Sci-Tech, Sports)</h5>
             </div>
         </div>
@@ -123,7 +123,8 @@
                 <form method="POST" class="form-wrapper">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <input type="text" id="article" name="article" class="form-control" placeholder="Enter Any News Article 'Headline' That Comes To Mind Here" required value="{{ article|default:'' }}">
+                        <input type="text" id="article" name="article" class="form-control" placeholder="Enter Any News Article 'Headline' That Comes To Mind Here" required value="{{ article|default:'' }}" style="color: rgb(125, 119, 119);" />
+
                     </div>
                     <div class="d-flex justify-content-end align-items-center">
                         <button type="submit" class="btn btn-primary"><span class="white-span">Classify the Article</span></button>
@@ -166,10 +167,10 @@
         <h5 class="text-white">About this algo: </h5>
         <h7>- I created this algo using a Count Vectorizer to convert words in articles into a numeric matrix of word frequencies. </h7> <br>
         <h7 class="text-white">- I then used a Naive Bayes algorithm to assign a Probability score of your entered text v/s each category. </h7> <br>
-        <h7 class="text-white">- The category with the higest assigned probability wins! (And that's the result you see). </h7> <br> <br> 
+        <h7 class="text-white">- The category with the highest assigned probability wins! (And that's the result you see). </h7> <br> <br> 
         
         <h5 class="text-white">Use cases of the underlying principle:  </h5>
-        <h7>- Twitter (X) tweets sentiment analysis: Positive, Negative, Neutral! </h7> <br>
+        <h7>- Twitter (X) tweets sentiment analysis: Positive,ç Negative, Neutral! </h7> <br>
         <h7>- Election Recommender: Voter sentiment towards a party basis sentiment analysis of multiple news articles in a region. </h7> <br>
         <h7>- HR Candidate Recommender system: Company Job Descriptions v/s Candidate resumes - Good fit v/s Not a good fit. </h7> <br>
         <h7>- Intent Classification: In chatbot systems, classifying user queries into specific intents (e.g., "book a flight", "check weather"). </h7> <br>

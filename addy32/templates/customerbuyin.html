@@ -240,19 +240,19 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="Education">Education (eg:1,2,3)</label>
+                            <label for="Education">Education   -  (School:0, Under-Grad:1, Graduation:2, Master:3, PhD:4)</label>
                             <input type="number" class="form-control" id="Education" name="Education" required value="{{ education|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="Marital_Status">Marital Status</label>
+                            <label for="Marital_Status">Marital Status - <br> Married: 1, Single: 2</label>
                             <input type="number" class="form-control" id="Marital_Status" name="Marital_Status" required value="{{ maritalstatus|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="Income">Income</label>
+                            <label for="Income">Income <br> (range: $1000 - $700,000)</label>
                             <input type="number" class="form-control" id="Income" name="Income" required value="{{ income|default:'' }}">
                         </div>
                     </div>
@@ -261,19 +261,19 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="Kidhome">Kidhome</label>
+                            <label for="Kidhome">Kids At Home <br> (range 0 - 2)</label>
                             <input type="number" class="form-control" id="Kidhome" name="Kidhome" required value="{{ kidhome|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="Teenhome">Teenhome</label>
+                            <label for="Teenhome">Teens At Home <br> (range 0 - 2) </label>
                             <input type="number" class="form-control" id="Teenhome" name="Teenhome" required value="{{ teenhome|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="MntFruits">MntFruits</label>
+                            <label for="MntFruits">Average Billing On Fruits <br> (range $0 - $200) </label>
                             <input type="number" class="form-control" id="MntFruits" name="MntFruits" required value="{{ mntfruits|default:'' }}">
                         </div>
                     </div>
@@ -282,19 +282,19 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="NumWebPurchases">Num Web Purchases</label>
+                            <label for="NumWebPurchases">Num Web Purchases <br> (range 0 - 27)</label>
                             <input type="number" class="form-control" id="NumWebPurchases" name="NumWebPurchases" required value="{{ newwebpurchases|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="NumCatalogPurchases">Num Catalog Purchases</label>
+                            <label for="NumCatalogPurchases">Num Catalog Purchases <br> (range 0 - 28)</label>
                             <input type="number" class="form-control" id="NumCatalogPurchases" name="NumCatalogPurchases" required value="{{ numcatalogpurchases|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="NumStorePurchases">Num Store Purchases</label>
+                            <label for="NumStorePurchases">Num Store Purchases <br> (range 0 - 13)</label>
                             <input type="number" class="form-control" id="NumStorePurchases" name="NumStorePurchases" required value="{{ numstorepurchases|default:'' }}">
                         </div>
                     </div>
@@ -303,13 +303,13 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="NumWebVisitsMonth">Num Web Visits Month</label>
+                            <label for="NumWebVisitsMonth">Num Web Visits Month <br> (range 0 - 20)</label>
                             <input type="number" class="form-control" id="NumWebVisitsMonth" name="NumWebVisitsMonth" required value="{{ numwebvisitsmonth|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="Complain">Complain</label>
+                            <label for="Complain">Complain <br> No: 1, Yes: 2 </label>
                             <input type="number" class="form-control" id="Complain" name="Complain" required value="{{ complain|default:'' }}">
                         </div>
                     </div>
@@ -357,7 +357,7 @@
         Decision Tree Classifier (accuracy: 86.38%), Random Forest (accuracy score: 88.8%), 
         K Nearest Neighbour (accuracy score: 83.92%), Support Vector machines (accuracy: 86.83%), 
         Gradient Boost Classifier (accuracy: 87.94%) </h7> <br>
-    <h7>- Recursive Feature Elimination (RFE): In order to improve the accuracy of the model I used Recursive Feature Elimination (RFE) to identify the most important features/predictors. This happens by testing the model by recursively elimintaing one predictor after another to get the best predictors</h7> <br> 
+    <h7>- Recursive Feature Elimination (RFE): In order to improve the accuracy of the model I used Recursive Feature Elimination (RFE) to identify the most important features/predictors. This happens by testing the model by recursively eliminating one predictor after another to get the best predictors</h7> <br> 
     <h7>- While in a model like SVC it is sometimes difficult to predict which predictors had more influence than the others the above combination of 11 predictors gave the highest accuracy score  </h7> <br> <br>
     
     <h5 class="text-white">Use cases of the underlying principle:  </h5>

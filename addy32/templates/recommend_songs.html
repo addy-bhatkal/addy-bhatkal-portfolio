@@ -122,7 +122,7 @@
             <!-- Add headers for the song and artist columns -->
             <div class="row mt-4">
                 <div class="col-md-6 mx-auto">
-                    <h3 class="text-center">Recommended Songs</h3>
+                    <h3 class="text-center">Recommended Songs </h3>
                     <div class="row mb-2">
                         <div class="col-md-6 text-start font-weight-bold" style="font-size: 1.5rem;">Artist</div> <!-- Align 'Song' to the left -->
                         <div class="col-md-6 text-end font-weight-bold" style="font-size: 1.5rem;">Song</div> <!-- Align 'Artist' to the right -->
@@ -138,6 +138,8 @@
                 </div>
             </div>
             {% endif %}
+
+
             <div class="row mt-5"> <!-- Added justify-content-end to move the content to the right -->
                 <div class="col-md-2"></div>
                 <div class="col-md-10"> <!-- Reduced the width to avoid full width and create space on the left -->
@@ -200,17 +202,17 @@
     <div class="col-md-12 ml-auto"> <!-- Reduced the width to avoid full width and create space on the left -->
         <h5 class="text-white">About this algo:  </h5> 
         <h7 class="text-white"> I created this algo using an NLP tokenizer and a Term Frequency/Inverse Document Frequency model to convert song lyrics into a matrix of word frequencies. I then use a cosine similarity score to calculate similarities between a song and other such songs. </h7>
-        <h7 class="text-white">The songs with the higest cosine similarity wins! (And that's the result you see). </h7> <br> <br> 
+        <h7 class="text-white">The songs with the highest cosine similarity wins! (And that's the result you see). </h7> <br> <br> 
         <h5 class="text-white">Use cases of the underlying principle:  </h5>
-        <h7>- Grant matching: Government agencies and NGOs can use this principle to idnetify their agency offering v/s grants that startups can apply to.</h7> <br>
+        <h7>- Grant matching: Government agencies and NGOs can use this principle to identify their agency offering v/s grants that startups can apply to.</h7> <br>
         <h7>- HR Recommender System: Matching the best candidates to an ideal job profile using descriptions of the two </h7> <br>
-        <h7>- Create your own Search Engine: This is also used in matchin search queries to results </h7> <br>
+        <h7>- Create your own Search Engine: This is also used in matching search queries to results </h7> <br>
 
        
         <h7 class="text-white"> <br>
             <h5 class="text-white">Dataset: What does the underlying data look like?:  </h5>
             <h7 class="text-white"> - The dataset consisted of 57,000 songs, its lyrics, its artists and its genres. </h7> <br>
-            <h7 class="text-white"> - The underlying text within it was used to check word/text frequency across other songs/lyrics. This was converted into a matrix, and a similairty correlation score was attached to it to give you the final result.  </h7> <br>
+            <h7 class="text-white"> - The underlying text within it was used to check word/text frequency across other songs/lyrics. This was converted into a matrix, and a similarity correlation score was attached to it to give you the final result.  </h7> <br>
             <h7 class="text-white"> - Data Training: The whole dataset was used to give you an answer and there was no split between training and testing data as such.  </h7> <br>
 
 </div>

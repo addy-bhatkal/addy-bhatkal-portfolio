@@ -122,12 +122,14 @@ def reco(song):
     distances = sorted(list(enumerate(sim)), reverse= True, key = lambda x : x[1])
     listy = []
     for i in distances[:15]:
-        listy.append([df.iloc[i[0]][0], df.iloc[i[0]][1]])
+        listy.append([df.iloc[i[0]][1], df.iloc[i[0]][2]])
         #listy2 = pd.DataFrame(listy)
     return listy
 
+
+
 def song_reco(request): 
-    song = None
+    song = request.GET.get('song', None)
     similar_songs = None
 
     if request.method == "POST":
@@ -160,7 +162,7 @@ with open('customerbuyin.sav', 'rb') as f2:
 
 def cby_ML(data):
     prob = float(cby_loaded_model.predict_proba(data)[0][1])
-    return int(cby_loaded_model.predict(data)[0]) ==1, f'The probability that this customer will buy into your current Ad campaign is {prob*100 :.2f} %'
+    return int(cby_loaded_model.predict(data)[0]) ==1, f'The probability with which this customer will buy into your current Ad campaign is {prob*100 :.2f} %'
 
 def cby(request):
     context = {}
@@ -184,11 +186,11 @@ def cby(request):
             result, prob = cby_ML(cby_data)
 
             if result: 
-                context['result'] = f' YES. {prob}'
+                context['result'] = f' Customer IS likely to sign up. {prob}'
                 context['result_class'] = 'success'
             else: 
-                context['result'] = f'No {prob}'
-                context['result_class'] = 'success'
+                context['result'] = f'Customer IS NOT likely to sign up. {prob}'
+                context['result_class'] = 'danger'
 
             context.update({
                 'education': education, 
@@ -311,27 +313,36 @@ def movierecom_ML(moviename):
     #movie_res2 = movie_res2.reset_index().rename(columns={'index': 'movies'})
     return movie_res2[['movies', 'corr']].head(50)
 
-from django.core.paginator import Paginator
+
+valid_movies = list(movie_df.columns)
 
 def movierecom(request): 
-    movie = None
+    movie = request.GET.get("movie",None)
     similar_movie = None
-
+    error_message = None
     try: 
         if request.method == "POST":
-            movie = request.POST.get('movie', '')
-            movie = movie.strip()
+            movie = request.POST.get('movie', '').strip()
+            
             if movie:
-                similar_movie_df = movierecom_ML(movie) 
-                similar_movie = similar_movie_df[['movies']].values.tolist() # Convert DataFrame to a list of tuples (movie name, correlation)
+                if movie in valid_movies:  # Check if the movie exists in your dataset
+                    similar_movie_df = movierecom_ML(movie) 
+                    similar_movie = similar_movie_df[['movies', 'corr']].values.tolist()
+                else:
+                    error_message = "Invalid Movie name - Please copy and enter an exact match from the list."
             else:
-                similar_movie = []
-
+                error_message = "No Movie name entered - Please copy and enter an exact match from the list."
     except ValueError:
-            similar_movie = []
+        error_message = "Invalid Movie name - Please copy and enter an exact match from the list."
 
-    return render(request, 'movierecommender.html', {'movie': movie, 'similar_movie': similar_movie if similar_movie is not None else []})
+    return render(request, 'movierecommender.html', {
+        'movie': movie,
+        'similar_movie': similar_movie if similar_movie is not None else [],
+        'error_message': error_message
+    })
 
+
+from django.core.paginator import Paginator
 
 def movie_list(request):
     movies = movie_df.columns.tolist()  # Assuming the column name is 'name'

@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	{% load static %}
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
 	<title>Addy Bhatkal Data Models Product Portfolio  </title>
 	<meta charset="utf-8">
@@ -32,8 +34,11 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" href="#section-home">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="#section-portfolio">Portfolio</a></li>
+					<li class="nav-item"><a class="nav-link" href="#section-about">About Me</a></li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#section-resume">Resume</a></li> -->
-					<li class="nav-item"><a class="nav-link" href="#section-about">About</a></li>
+					 <li class="nav-item"><a class="nav-link" href="#section-myroadmap">My Roadmap</a></li>
+					<li class="nav-item"><a class="nav-link" href="#section-keyskills">Key Skills</a></li>
+					
 					<li class="nav-item"><a class="nav-link" href="#section-contact">Contact</a></li>
 				</ul>
 			</div>
@@ -41,18 +46,17 @@
 	</nav>
 
 
-
-
 	<section class="site-hero" style="background-image: url('{% static 'images/image_1.jpg' %}');" id="section-home" data-stellar-background-ratio="0.5">
 		<div class="container">
-			<div class="row intro-text align-items-center justify-content-center">
-				<div class="col-md-10 text-center pt-5">
+			<div class="row intro-text align-items-center justify-content-center" style="padding-top: 170px;">
+				<div class="col-md-12 text-center pt-3">
 
 					<h1 class="site-heading site-animate">Hello, I'm <strong class="d-block">Aditya Bhatkal</strong></h1>
-					<strong class="d-block text-white text-uppercase letter-spacing">...a jr. data scientist who likes to find patterns in the way things function</strong>
-					<strong class="d-block text-white text-uppercase letter-spacing">Welcome to my playground.ie my website that brings my math models and algos to you. Experiment! Nerd out! Knock Yourself out! </strong>
+					<P style="color: rgb(232, 223, 223);">...A jr. Data Scientist and Product Manager who likes to find correlations patterns in the way things function.
+					</P>
+					<p style="color: rgb(232, 223, 223);"> My Story: Two years ago I cashed in on some of my bitcoin to bootstrap the biggest challenge of my life - learning how to code math! aka Data Science. And went from quitting everyday in the start to seamlessly writing 10s of 1000s of lines of code. In doing so, I annihilated my biggest competitor - my own mind! I then spent some more of that bitcoin money on purchasing some heavy duty computing space on the cloud. I now use that cloud space to run my Machine Learning code and bring to you MY WEBSITE - An anthology of recommendation engines, predictive models and data visualizations! Scroll down! </h6><br>
+					<!-- <strong class="d-block text-white text-uppercase letter-spacing">Welcome to my playground.ie my website that brings my math models and algos to you. Experiment! Nerd out! Knock Yourself out! </strong> -->
 					
-
 				</div>
 			</div>
 		</div>
@@ -157,110 +161,99 @@
 	</section>
 	<!-- .section -->
 
-	<!-- My Resume Section
-	<section class="site-section " id="section-resume">
+	<section class="site-section" id="section-about" style="margin-top: -30px;">
 		<div class="container">
-					
-			<div class="row">
-				<div class="col-md-12 mb-5">
-					<div class="section-heading text-center">
-						<h2>My <strong>Resume</strong></h2>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<h2 class="mb-5">Education</h2>
-					<div class="resume-item mb-4">
-						<span class="date"><span class="icon-calendar"></span> March 2013 - Present</span>
-						<h3>Masteral in Information Technology</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-						<span class="school">New York University</span>
-					</div>
-
-					<div class="resume-item mb-4">
-						<span class="date"><span class="icon-calendar"></span> March 2013 - Present Deacember.</span>
-						<h3>Masteral in Information Technology</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-						<span class="school">New York University</span>
-					</div>
-
-					<div class="resume-item mb-4">
-						<span class="date"><span class="icon-calendar"></span> March 2013 - Present</span>
-						<h3>Masteral in Information Technology</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-						<span class="school">New York University</span>
-					</div>
-
-					<div class="resume-item mb-4">
-						<span class="date"><span class="icon-calendar"></span> March 2013 - Present Deacember.</span>
-						<h3>Masteral in Information Technology</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-						<span class="school">New York University</span>
-					</div>
-
-				</div>
-				<div class="col-md-6">
-
-
-					<h2 class="mb-5">Experience</h2>
-
-					<div class="resume-item mb-4">
-						<span class="date"><span class="icon-calendar"></span> March 2013 - Present</span>
-						<h3>Lead Product Designer</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-						<span class="school">Github</span>
-					</div>
-
-					<div class="resume-item mb-4">
-						<span class="date"><span class="icon-calendar"></span> March 2013 - Present</span>
-						<h3>Lead Product Designer</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-						<span class="school">Facebook</span>
-					</div>
-
-					<div class="resume-item mb-4">
-						<span class="date"><span class="icon-calendar"></span> March 2013 - Present</span>
-						<h3>Lead Product Designer</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-						<span class="school">Twitter</span>
-					</div>
-
-					<div class="resume-item mb-4">
-						<span class="date"><span class="icon-calendar"></span> March 2013 - Present</span>
-						<h3>Lead Product Designer</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-						<span class="school">Shopify</span>
-					</div>
-
-
-				</div>
-			</div>
-		</div>
-	</section> .section -->
-
-	<section class="site-section" id="section-about">
-		<div class="container">
-			<div class="row mb-5 align-items-center">
-				<div class="col-lg-7 pr-lg-5 mb-5 mb-lg-0">
+			<div class="row align-items-center">
+				<div class="col-lg-6 mb-2 mb-lg-2">
 					<img src="{% static 'images/image_1.jpg' %}" alt="Image placeholder" class="img-fluid">
 				</div>
-				<div class="col-lg-5 pl-lg-5">
+				<div class="col-lg-6 pl-lg-6">
 					<div class="section-heading">
 						<h2>About <strong>Me</strong></h2>
 					</div>
-					<p class="mb-5  ">Hi I'm Addy a jr. Data Scientist and Product Manager. I led a tech-sales team at The Sales factory in Toronto, Canada selling SaaS products into The East Coast of USA</p>
-					<p class="mb-5  ">I transitioned into coding predictive models using python to gain a deeper understanding of the tech I sold.</p>
-					<p class="mb-5  ">I've consulted on product teams .</p>
+					
 
+					<h6>Hi I'm Addy, a Data Scientist and Product Manager, with an MBA from University of Ottawa Canada. Before that, I led a tech-sales team at The Sales Factory in Toronto, Canada, selling SaaS products to companies on the East Coast in the USA.</h6><br>
+					<h6>Product - After the MBA (Data and Product Ops), I've consulted on product teams using statistical tools like hypothesis testing to validate the impact on the product roadmap by conducting primary research.</h6><br>
+					<h6>Marketing - I've worked on marketing campaigns for Red Bull, Marvel Studios, Disney, and Marriott Hotels to understand what sells!</h6><br>
+					<h6>Data Visualization - I've incorporated a feedback loop based on user testing on launched features and reported performance analytics using Data Visualization tools - Tableau/PowerBI.</h6><br>
+					<h6>Math, Stats and Algos - I've also used statistical tools and propensity models like (Regression models, Ensemble Learning (Decision Trees)) to predict user behaviour, conducted A/B testing to check against actuals, and incorporated the same into feature iterations.</h6><br>
 					<p>
-						<a href="#section-contact" class="btn btn-primary px-4 py-2 btn-sm smoothscroll">Hire Me</a>
-						<a href="#" class="btn btn-secondary px-4 py-2 btn-sm">Download CV</a>
-					</p>
+						<a href="#section-contact" class="btn btn-primary px-4 py-2 btn-sm smoothscroll">Hire Me</a>					</p>
 				</div>
 			</div>
-
-
 		</div>
 	</section>
+
+
+		<!-- Resume Roadmap Section -->
+		<section class="site-section " id="section-myroadmap">
+			<div class="container">
+						
+				<div class="row">
+					<div class="col-md-12 mb-5">
+						<div class="section-heading text-center">
+							<h2>My <strong>Roadmap</strong></h2>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<h2 class="mb-5">Pre-Coding Experience</h2>
+						<div class="resume-item mb-4">
+							<span class="date"><span class="icon-calendar"></span> Nov 2017 - Feb 2019</span>
+							<h3>Marketing Tech</h3>
+							<p>Created go to marketing (and sales) strategies for Marvel Studios in India</p>
+							<span class="school">Bombay, India</span>
+						</div>
+	
+						<div class="resume-item mb-4">
+							<span class="date"><span class="icon-calendar"></span> 2019 - 2020</span>
+							<h3>MBA, University of Ottawa</h3>
+							<p>Merged the world of Data Ops and Business to see how the world worked, how economies get impacted by fast moving data and how international business cultures cross-integrated with each other </p>
+							<span class="school">Ottawa, Canada</span>
+						</div>
+	
+						<div class="resume-item mb-4">
+							<span class="date"><span class="icon-calendar"></span> August 2020 - May 2022</span>
+							<h3>Sales Lead - The Sales Factory</h3>
+							<p>Learned the ropes of tech in North America by selling to US based SaaS companies. Learned what a go-to market strategy in USA looks like and executed it company-wide helping take the team from 6 to 160</p>
+							<span class="school">Toronto, Canada</span>
+						</div>
+	
+	
+					</div>
+					<div class="col-md-6">
+	
+	
+						<h2 class="mb-5">Post-Coding Experience</h2>
+	
+						<div class="resume-item mb-4">
+							<span class="date"><span class="icon-calendar"></span> August 2020 - August 2023</span>
+							<h3>Product Lead - The Sales Factory + IBM Evoke</h3>
+							<p> Consulted the same clients on a product road map (in Sales Ops Tech (ZoomInfo/Apollo),  HR and Marketing Tech (HubSpot/Outreach), Health-Tech, Government Project Tech, Agri-tech) on the back of firsthand primary data gathered through customer discovery calls during sales meetings </p>
+							<span class="school">Toronto, Canada</span>
+						</div>
+	
+						<div class="resume-item mb-4">
+							<span class="date"><span class="icon-calendar"></span>  Jan 2022 - Present
+						</span>
+							<h3>The Data Science + Coding journey </h3>
+							<p>After selling and creating product roadmaps for these companies I was interested in digging deeper into how the numbers behind these tech products create the product that is! I started coding and building my own algos and used bootstrapped data available across government websites and data aggregators. </p>
+							<span class="school">Facebook</span>
+						</div>
+	
+						<div class="resume-item mb-4">
+							<span class="date"><span class="icon-calendar"></span> October 2024 - Present</span>
+							<h3>Building this website</h3>
+							<p>Used ALL the learnings from the yester-years to build this website from scratch including the backend python code, the Django API interface, the cloud servers that help run these algos and the  frontend HTML + CSS. </p>
+							<span class="school">Twitter</span>
+						</div>
+	
+	
+	
+					</div>
+				</div>
+			</div>
+		</section> 
 
 	<!-- <section TESTIMONIAL SECTION class="site-section">
 		<div class="container">
@@ -330,14 +323,14 @@
 		</div>
 	</section> -->
 
-
-	<section class="site-section pb-0"  id="section-services">
+<!-- <section> Key Skills </section> -->
+	<section class="site-section pb-0"  id="section-keyskills">
 		<div class="container">
 
-			<div class="row mb-4">
+			<div class="row mb-6">
 				<div class="col-md-12">
 					<div class="section-heading text-center">
-						<h2>My <strong>Services</strong></h2>
+						<h2>Key <strong>Skills</strong></h2>
 					</div>
 				</div>
 			</div>
@@ -348,9 +341,9 @@
 						<span class="icon">
 							<span class="icon-browser2"></span>
 						</span>
-						<h3 class="mb-4">Web Design</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-						<p><a href="#" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
+						<h3 class="mb-4">Predictive Analytics - Data Science </h3>
+						<p>I code recommender engines and predictive models in python using math models like Logistic Regression, Ridge and Lasso Regression, Classification algos like K-Means cluster, Support Vector Machines and a few AI algos too.</p>
+						<p><a href="#section-contact" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-4 text-center mb-5">
@@ -358,9 +351,9 @@
 						<span class="icon">
 							<span class="icon-presentation"></span>
 						</span>
-						<h3 class="mb-4">Search Engine Optimization</h3>
-						<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-						<p><a href="#" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
+						<h3 class="mb-4">Product Management - <br> SaaS Tools</h3>
+						<p>I've enabled the release of product features on SaaS tools (in Toronto Canada), including mapping Sales lists functionalities and developing call recording analytics for sales teams selling SaaS products </p>
+						<p><a href="#section-contact" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-4 text-center mb-5">
@@ -368,9 +361,57 @@
 						<span class="icon">
 							<span class="icon-video2"></span>
 						</span>
-						<h3 class="mb-4">Video Editing</h3>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-						<p><a href="#" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
+						<h3 class="mb-4"> New Product Development</h3>
+						<p>I've owned the whole cycle from inception/ideation on a product and its features and consumer research to deploying it liaising with marketing, engineering and management teams.</p>
+						<p><a href="#section-contact" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
+					</div>
+				</div>
+
+				
+
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- <section> Contact Me </section> -->
+
+	<section class="site-section pb-0"  id="section-contact">
+		<div class="container">
+
+			<div class="row mb-4">
+				<div class="col-md-12">
+					<div class="section-heading text-center">
+						<h2>Contact <strong>Me</strong></h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="col-md-6 col-lg-4 text-center mb-5">
+					<div class="site-service-item site-animate" data-animate-effect="fadeIn" style="background-color: black; color: white; padding: 20px; border-radius: 10px;">
+						<i class="fas fa-envelope"></i>
+						</span>
+						<h3 class="mb-4">email</h3>
+						<p>abhat020@uottawa.ca</p>
+						<p>  adityabhatkal@gmail.com  </p>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 text-center mb-5">
+					<div class="site-service-item site-animate" data-animate-effect="fadeIn" style="background-color: black; color: white; padding: 20px; border-radius: 10px;">
+
+							<i class="fas fa-phone-alt"></i>
+						<h3 class="mb-4">Phone</h3>
+						<p>WhatsApp: +1 4168383484 </p>
+						<p>Call/Text: +91 9833127925 </p>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 text-center mb-5">
+					<div class="site-service-item site-animate" data-animate-effect="fadeIn" style="background-color: black; color: white; padding: 20px; border-radius: 10px;">
+						<i class="fas fa-map-marker-alt"></i>
+						<h3 class="mb-4"> Address</h3>
+						<p>WeWork Enam Sambhav - C - 20, G Block Rd, G Block BKC, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051</p>
 					</div>
 				</div>
 
@@ -386,11 +427,9 @@
 			<div class="row mb-5">
 				<div class="col-md-12 text-center">
 					<p>
-						<a href="#" class="social-item"><span class="icon-facebook2"></span></a>
-						<a href="#" class="social-item"><span class="icon-twitter"></span></a>
+						<a href="https://x.com/adityabhatkal" class="social-item"><span class="icon-twitter"></span></a>
 						<a href="https://www.instagram.com/instacurly3/" class="social-item" target="_blank"><span class="icon-instagram2"></span></a>
 						<a href="https://www.linkedin.com/in/addy-bhatkal/" class="social-item" target="_blank"><span class="icon-linkedin2"></span></a>
-						<a href="#" class="social-item"><span class="icon-vimeo"></span></a>
 					</p>
 				</div>
 			</div>
