@@ -361,3 +361,57 @@ def movie_list(request):
         'page_range': page_range,
         'r' : range(1,11)
     })
+
+def dropout_prediction(request):
+    context = dict()
+    
+    """f request.method == 'GET':
+        print(request.GET.get("manoj"))  # Initialize the context dictionary
+"""
+    if request.method == 'POST':
+        try:
+    #         'Marital status', 'Admission grade',
+    #    'Displaced', 'Educational special needs', 'Gender', 'Scholarship holder', 
+    #     'Age at enrollment', 'Unemployment rate', 'Inflation rate', 'GDP'
+
+            marital_status = int(request.POST['Marital status'])
+            admission_grade = float(request.POST['admission_grade'])
+            displaced = int(request.POST['Displaced'])
+            education_special_needs = int(request.POST['Education special needs'])
+            gender = int(request.POST['Gender'])
+            scholarship_holder= float(request.POST['Scholarship holder'])
+            Age_at_enrollment = float(request.POST['Age at enrollment'])
+            unemployment_rate= int(request.POST['Unemployment rate'])
+            inflation_rate= int(request.POST['Unemployment rate'])
+            gdp= int(request.POST['GDP'])
+
+            data = [[marital_status, admission_grade, displaced, education_special_needs, gender,scholarship_holder, Age_at_enrollment,unemployment_rate,inflation_rate,gdp ]]
+
+            result,probability = infer_diabetes(data)  # Assuming infer_diabetes is imported and works properly
+
+            if result:
+                context['result'] = f"Droput possible! {probability}"
+                context['result_class'] = "danger"
+            else:
+                context['result'] = f"Less droupout possiblility . {probability}"
+                context['result_class'] = "success"
+
+            # Pass the input values back to the template
+            context.update({
+                "marital_status" : marital_status,
+            "admission_grade" : admission_grade,
+            "displaced" : displaced,
+            "education_special_needs" :education_special_needs,
+            "gender"  : gender,
+            "scholarship_holder" : scholarship_holder,
+            "Age_at_enrollment" : Age_at_enrollment,
+            "unemployment_rate" : unemployment_rate,
+            "inflation_rate" : inflation_rate,
+            "gdp" : gdp
+            })
+
+        except ValueError:
+            context['result'] = "Invalid input! Please enter valid numbers."
+            context['result_class'] = "danger" #the class danger means the text will pop up in red
+
+    return render(request, 'droppout.html', context)
