@@ -402,7 +402,7 @@ def dropout_prediction(request):
                 context['result'] = f"Droput possible! {probability}"
                 context['result_class'] = "danger"
             else:
-                context['result'] = f"Less droupout possiblility . {probability}"
+                context['result'] = f"Lower dropout possiblility. {probability}"
                 context['result_class'] = "success"
 
             # Pass the input values back to the template
