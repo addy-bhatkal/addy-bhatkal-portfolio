@@ -27,7 +27,7 @@ def home(request):
         {'endpoint': 'Bank Credit Card Customer Churn (Logistic Regression)', 'url': "bankchurn/", 'image':'images/bank.png'},
         {'endpoint': 'Data Visualizations: Tableau', 'url': "DataViz/", 'image': 'images/dataviz.png'}, 
         {'endpoint': 'HousingPrices', 'url': "coming-soon/", 'image': 'images/uc.png'}, 
-        {'endpoint': 'Student Dropout', 'url': "droppout/", 'image': 'images/dropout_tile.jpg'}
+        {'endpoint': 'Student Dropout', 'url': "dropout/", 'image': 'images/dropout_tile.jpg'}
         
     ]
     return render(request, 'home.html', {'routes': routes})
@@ -368,7 +368,7 @@ with open('dropout.sav', 'rb') as f2:
 
 def infer_dropp(ip_data):
     prob = dropout_model.predict_proba(ip_data)[0][1]
-    return dropout_model.predict_proba(ip_data)[0][1] >0.3, f"The probability with which this person going to droppout is: {prob*100 :.2f} %"
+    return dropout_model.predict_proba(ip_data)[0][1] >0.3, f"The probability with which this person going to dropout is: {prob*100 :.2f} %"
      #ML part of code
 
 def dropout_prediction(request):
