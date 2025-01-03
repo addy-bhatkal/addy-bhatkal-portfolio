@@ -383,12 +383,12 @@ def dropout_prediction(request):
     #     'Age at enrollment', 'Unemployment rate', 'Inflation rate', 'GDP'
 
             marital_status = int(request.POST['Marital status'])
-            admission_grade = float(request.POST['admission_grade'])
+            admission_grade = int(request.POST['admission_grade'])
             displaced = int(request.POST['Displaced'])
             education_special_needs = int(request.POST['Education special needs'])
             gender = int(request.POST['Gender'])
-            scholarship_holder= float(request.POST['Scholarship holder'])
-            Age_at_enrollment = float(request.POST['Age at enrollment'])
+            scholarship_holder= int(request.POST['Scholarship holder'])
+            Age_at_enrollment = int(request.POST['Age at enrollment'])
             unemployment_rate= int(request.POST['Unemployment rate'])
             inflation_rate= int(request.POST['inflation rate'])
             gdp= int(request.POST['GDP'])
