@@ -362,6 +362,14 @@ def movie_list(request):
         'r' : range(1,11)
     })
 
+with open('dropout.sav', 'rb') as f2:
+    dropout_model = pickle.load(f2)
+
+def infer_dropp(ip_data):
+    prob = dropout_model.predict_proba(ip_data)[0][1]
+    return dropout_model.predict_proba(ip_data)[0][1] >0.3, f"The probability with which this person going to droppout is: {prob*100 :.2f} %"
+     #ML part of code
+
 def dropout_prediction(request):
     context = dict()
     
@@ -382,12 +390,12 @@ def dropout_prediction(request):
             scholarship_holder= float(request.POST['Scholarship holder'])
             Age_at_enrollment = float(request.POST['Age at enrollment'])
             unemployment_rate= int(request.POST['Unemployment rate'])
-            inflation_rate= int(request.POST['Unemployment rate'])
+            inflation_rate= int(request.POST['inflation rate'])
             gdp= int(request.POST['GDP'])
 
             data = [[marital_status, admission_grade, displaced, education_special_needs, gender,scholarship_holder, Age_at_enrollment,unemployment_rate,inflation_rate,gdp ]]
 
-            result,probability = infer_diabetes(data)  # Assuming infer_diabetes is imported and works properly
+            result,probability = infer_dropp(data)  # Assuming infer_diabetes is imported and works properly
 
             if result:
                 context['result'] = f"Droput possible! {probability}"

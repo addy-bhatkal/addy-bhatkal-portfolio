@@ -28,6 +28,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name = 'home'),
     path("diabetes/", views.diabetes, name = 'diabetes'),
+    path("droppout/", views.dropout_prediction, name = 'droppout'),
     path("nclassifier/", views.nclassifier, name = 'nclassifier'),
     path("recommend_songs/", views.song_reco, name = 'song_reco'),
     path("customerbuyin/", views.cby, name = 'customerbuyin'),

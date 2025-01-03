@@ -40,9 +40,7 @@
             color: rgb(255, 255, 255);
         }
 
-            {
-            % load static %
-        }
+            {% load static %}
 
         body {
             background-color: #f1f1f1;
@@ -120,28 +118,28 @@
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="Pregnancies">Marital Status <br>(range:0-10)</label>
-                            <input type="number" class="form-control" id="Pregnancies" name="Pregnancies" required
+                            <input type="number" class="form-control" id="Pregnancies" name="Marital status" required
                                 value="{{ marital_status|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="Glucose"> Admission grade <br> Normal= <5.9 mmol/L </label>
-                                    <input type="number" class="form-control" id="Glucose" name="Glucose" required
+                                    <input type="number" class="form-control" id="Glucose" name="admission_grade" required
                                         value="{{ admission_grade|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="BloodPressure"> Displaced <br>Normal = <130 mmHg</label>
-                                    <input type="number" class="form-control" id="BloodPressure" name="BloodPressure"
+                                    <input type="number" class="form-control" id="BloodPressure" name="Displaced"
                                         required value="{{ displaced|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="Age">education special needs <br>(range:0-100) </label>
-                            <input type="number" class="form-control" id="Age" name="Age" required
+                            <input type="number" class="form-control" id="Age" name="Education special needs" required
                                 value="{{ education_special_needs|default:'' }}">
                         </div>
                     </div>
@@ -151,21 +149,21 @@
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="SkinThickness">Gender <br> (Normal= <20mm) </label>
-                                    <input type="number" class="form-control" id="SkinThickness" name="SkinThickness"
+                                    <input type="number" class="form-control" id="SkinThickness" name="Gender"
                                         required value="{{ gender|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="Insulin">Scholarship Holder<br> Normal = <90 (pmol/L) </label>
-                                    <input type="number" class="form-control" id="Insulin" name="Insulin" required
+                                    <input type="number" class="form-control" id="Insulin" name="Scholarship holder" required
                                         value="{{ scholarship_holder|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="BMI">Age at enrollment<br> Normal = <24.9 kg/m² </label>
-                                    <input type="number" step="0.1" class="form-control" id="BMI" name="BMI" required
+                                    <input type="number" step="0.1" class="form-control" id="BMI" name="Age at enrollment" required
                                         value="{{ Age_at_enrollment|default:'' }}">
                         </div>
                     </div>
@@ -173,7 +171,7 @@
                         <div class="form-group mb-4">
                             <label for="DiabetesPedigreeFunction">Unemployment Rate <br> Normal =<1< /label>
                                     <input type="number" step="0.01" class="form-control" id="DiabetesPedigreeFunction"
-                                        name="DiabetesPedigreeFunction" required
+                                        name="Unemployment rate" required
                                         value="{{ unemployment_rate|default:'' }}">
                         </div>
                     </div>
@@ -183,14 +181,14 @@
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="SkinThickness">Inflation Rate <br> (Normal= <20mm) </label>
-                                    <input type="number" class="form-control" id="SkinThickness" name="SkinThickness"
+                                    <input type="number" class="form-control" id="SkinThickness" name="inflation rate"
                                         required value="{{ inflation_rate|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
                             <label for="Insulin">GDB<br> Normal = <90 (pmol/L) </label>
-                                    <input type="number" class="form-control" id="Insulin" name="Insulin" required
+                                    <input type="number" class="form-control" id="Insulin" name="GDP" required
                                         value="{{ gdb|default:'' }}">
                         </div>
                     </div>
