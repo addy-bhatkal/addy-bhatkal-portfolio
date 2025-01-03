@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diabetes Prediction (Algo: Random Forest Classifier)</title>
+    <title>Dasra School drop out rate prediction</title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -44,7 +44,7 @@
 
         body {
             background-color: #f1f1f1;
-            background-image: url("{% static 'images/diabetes_page.png' %}");
+            background-image: url("{% static 'images/dasra.jpg' %}");
             background-size: cover;
             background-position: top center;
             background-repeat: repeat;
@@ -101,8 +101,8 @@
 <body>
 
     <div class="container center">
-        <h1 class="mt-5 ml-2">Diabetes Prediction (Algo: Random Forest Classifier)</h1>
-        <h4 class="mt-2 ml-2"> Feel free to enter dummy values/educated guesses to test this model out. </h4> <br> <br>
+        <h1 class="mt-5 ml-2">Impact Investing Case Study: School Drop Out</h1>
+        <h4 class="mt-2 ml-2"> Enter dummy values below to test this model out. </h4> <br> <br>
 
         <!-- Display result message -->
         {% if result %}
@@ -117,28 +117,28 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="Pregnancies">Marital Status <br>(range:0-10)</label>
-                            <input type="number" class="form-control" id="Pregnancies" name="Marital status" required
+                            <label for="Marital Status">Marital Status <br>(range:0-1)</label>
+                            <input type="number" class="form-control" id="Pregnancies" name="Marital Status" required
                                 value="{{ marital_status|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="Glucose"> Admission grade <br> Normal= <5.9 mmol/L </label>
+                            <label for="Glucose"> Admission Grade <br> (range: 95.0 - 190.0) </label>
                                     <input type="number" class="form-control" id="Glucose" name="admission_grade" required
                                         value="{{ admission_grade|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="BloodPressure"> Displaced <br>Normal = <130 mmHg</label>
+                            <label for="BloodPressure"> Displaced <br>range(0-1)</label>
                                     <input type="number" class="form-control" id="BloodPressure" name="Displaced"
                                         required value="{{ displaced|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="Age">education special needs <br>(range:0-100) </label>
+                            <label for="Age">Education Special Needs <br>(range:0-1) </label>
                             <input type="number" class="form-control" id="Age" name="Education special needs" required
                                 value="{{ education_special_needs|default:'' }}">
                         </div>
@@ -148,28 +148,28 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="SkinThickness">Gender <br> (Normal= <20mm) </label>
+                            <label for="SkinThickness">Gender <br> range(0-1) </label>
                                     <input type="number" class="form-control" id="SkinThickness" name="Gender"
                                         required value="{{ gender|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="Insulin">Scholarship Holder<br> Normal = <90 (pmol/L) </label>
+                            <label for="Insulin">Scholarship Holder<br> range(0-1) </label>
                                     <input type="number" class="form-control" id="Insulin" name="Scholarship holder" required
                                         value="{{ scholarship_holder|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="BMI">Age at enrollment<br> Normal = <24.9 kg/m² </label>
+                            <label for="BMI">Age At Enrollment<br> range(17-70) </label>
                                     <input type="number" step="0.1" class="form-control" id="BMI" name="Age at enrollment" required
                                         value="{{ Age_at_enrollment|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="DiabetesPedigreeFunction">Unemployment Rate <br> Normal =<1< /label>
+                            <label for="DiabetesPedigreeFunction">Unemployment Rate <br> range(7.6-16.2)</label>
                                     <input type="number" step="0.01" class="form-control" id="DiabetesPedigreeFunction"
                                         name="Unemployment rate" required
                                         value="{{ unemployment_rate|default:'' }}">
@@ -180,14 +180,14 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="SkinThickness">Inflation Rate <br> (Normal= <20mm) </label>
+                            <label for="SkinThickness">Inflation Rate <br> range(-0.8 - 3.7) </label>
                                     <input type="number" class="form-control" id="SkinThickness" name="inflation rate"
                                         required value="{{ inflation_rate|default:'' }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-4">
-                            <label for="Insulin">GDB<br> Normal = <90 (pmol/L) </label>
+                            <label for="Insulin">GDP<br> range(-4.06 - 3.51) </label>
                                     <input type="number" class="form-control" id="Insulin" name="GDP" required
                                         value="{{ gdb|default:'' }}">
                         </div>
@@ -224,22 +224,23 @@
                 </style>
 
                 <h5 class="text-white">About this algo: </h5>
-                <h7 class="text-white"> - I created this model using a Random Forest Classifier on a dataset of 2,500
-                    patient observations to predict diabetes outcomes. Accuracy score: 84.41% <br>
-                    <h7>- I also tested this using models like Logistic Regression Classifier (accuracy: 81.81%),
-                        Decision Tree Classifier (accuracy: 75.97%), K Nearest Neighbour (accuracy score: 77.92%),
-                        Support Vector machines (accuracy: 75.32%), Gradient Boost Classifier (accuracy: 74.67%) </h7>
-                    <br> <br>
-                    <h7> - The Random Forest algorithm creates multiple decision trees from subsets of the data, where
-                        each tree makes its own prediction. The final prediction is made based on the majority vote of
-                        these trees. </h7> <br>
-                    <h7 class="text-white">- FYI: A Decision Tree algorithm works by splitting the dataset into branches
-                        based on feature values, such as age, glucose levels, and BMI. Each branch represents a
-                        decision, and the tree continues splitting until it reaches a prediction. </h7> <br> <br>
+                <h7 class="text-white"> - I created this model using a Gradient Boost Classifier on a dataset of 76500
+                    student observations to predict drop out rates. Accuracy score: 63.4% <br>
+                    <h7>- I also tested this using models like Logistic Regression Classifier (accuracy: <60% ),
+                        Decision Tree Classifier (accuracy: <60%), K Nearest Neighbour (accuracy score: <60% ),
+                        Support Vector machines (accuracy: <60%), Gradient Boost Classifier (accuracy: <60%) </h7> <br>
+
+                        <h7 class="text-white">- This relatively complex model can be used when linear relationships are not 
+                            clearly visible and decision trees are struggling to give pure direct answers. 
+                            We thus use a learning rate to fix the accuracy. </h7> <br>
+                        <h7> - The Gradient Boost algorithm applies a new model (say decision Trees) each time and corrects 
+                        the errors of the previous one by focusing on the data points with the highest errors. 
+                        Using decision trees it creates a strong predictive model through optimization of a 
+                        loss function.(A loss function measures how far a model's predictions are from the actual 
+                        values) </h7> <br>
+ <br>
 
                     <h5 class="text-white">Use cases of the underlying principle: </h5>
-                    <h7>- The Random Forest Classifier just like other classification algorithms (Logistic Regression,
-                        Decision Trees, XGBoost, Support Vector Machines, KMeans Cluster) could be used to: </h7> <br>
                     <h7>- Predict customer lifetime value (CLV), Predict player performance or game outcomes like in the
                         movie Moneyball,
                         Predict healthcare stats and analytics like on your Fitbit or Apple watch to recommend workouts
@@ -258,7 +259,7 @@
 
                     <h7 class="text-white"> <br>
                         <h5 class="text-white">Dataset: What does the underlying data look like?: </h5>
-                        <h7 class="text-white"> - The dataset was an excel sheet of values of the same parameters you
+                        <h7 class="text-white"> - The dataset was an excel sheet of 76,500 values of the same parameters you
                             see above in the from. </h7> <br>
                         <h7 class="text-white"> - Data Training: 80% of that data was used to train the model and 20%
                             was used to test it which gave you the accuracy score you see above. </h7> <br>

@@ -26,7 +26,8 @@ def home(request):
         {'endpoint': 'Customer Marketing Campaign Buy-in (Light Gradient Boost)', 'url': 'customerbuyin/', 'image':'images/cby2.png'},
         {'endpoint': 'Bank Credit Card Customer Churn (Logistic Regression)', 'url': "bankchurn/", 'image':'images/bank.png'},
         {'endpoint': 'Data Visualizations: Tableau', 'url': "DataViz/", 'image': 'images/dataviz.png'}, 
-        {'endpoint': 'HousingPrices', 'url': "coming-soon/", 'image': 'images/uc.png'}
+        {'endpoint': 'HousingPrices', 'url': "coming-soon/", 'image': 'images/uc.png'}, 
+        {'endpoint': 'Student Dropout', 'url': "droppout/", 'image': 'images/dropout_tile.jpg'}
         
     ]
     return render(request, 'home.html', {'routes': routes})
@@ -170,7 +171,7 @@ def cby(request):
     if request.method == 'POST':
         try:
             education = int(request.POST['Education'])
-            maritalstatus = int(request.POST['Marital_Status'])
+            marriagestatus = int(request.POST['marriagestatus'])
             income = int(request.POST['Income'])
             kidhome = int(request.POST['Kidhome'])
             teenhome = int(request.POST['Teenhome'])
@@ -181,7 +182,7 @@ def cby(request):
             numwebvisitsmonth = int(request.POST['NumWebVisitsMonth'])
             complain = int(request.POST['Complain'])
 
-            cby_data = [[education, maritalstatus, income, kidhome, teenhome, mntfruits, newwebpurchases, numcatalogpurchases, numstorepurchases, numwebvisitsmonth, complain]]
+            cby_data = [[education, marriagestatus, income, kidhome, teenhome, mntfruits, newwebpurchases, numcatalogpurchases, numstorepurchases, numwebvisitsmonth, complain]]
 
             result, prob = cby_ML(cby_data)
 
@@ -194,7 +195,7 @@ def cby(request):
 
             context.update({
                 'education': education, 
-                'maritalstatus': maritalstatus, 
+                'marriagestatus': marriagestatus, 
                 'income': income, 
                 'kidhome': kidhome, 
                 'teenhome': teenhome, 
@@ -382,7 +383,7 @@ def dropout_prediction(request):
     #    'Displaced', 'Educational special needs', 'Gender', 'Scholarship holder', 
     #     'Age at enrollment', 'Unemployment rate', 'Inflation rate', 'GDP'
 
-            marital_status = int(request.POST['Marital status'])
+            marital_status = int(request.POST['Marital Status'])
             admission_grade = int(request.POST['admission_grade'])
             displaced = int(request.POST['Displaced'])
             education_special_needs = int(request.POST['Education special needs'])
@@ -406,7 +407,7 @@ def dropout_prediction(request):
 
             # Pass the input values back to the template
             context.update({
-                "marital_status" : marital_status,
+            "marital_status" : marital_status,
             "admission_grade" : admission_grade,
             "displaced" : displaced,
             "education_special_needs" :education_special_needs,
